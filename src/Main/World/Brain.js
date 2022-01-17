@@ -1,6 +1,6 @@
 import Main from "../Main.js";
 
-export default class brain
+export default class Bain
 {
     constructor()
     {

@@ -13,4 +13,7 @@ npm run dev
 
 # Build for production in the dist/ directory
 npm run build
+
+# Deploy on vercel
+npm run deploy
 ```

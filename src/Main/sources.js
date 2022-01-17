@@ -14,5 +14,13 @@ export default [
         [
             'models/brain.glb'
         ]
+    },
+    {
+        name: 'planeModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/plane.glb'
+        ]
     }
 ]

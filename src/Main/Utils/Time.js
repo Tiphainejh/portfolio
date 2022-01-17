@@ -1,3 +1,4 @@
+import Main from '../Main.js'
 import EventEmitter from './EventEmitter.js'
 
 export default class Time extends EventEmitter
@@ -7,11 +8,13 @@ export default class Time extends EventEmitter
         super()
 
         //setup
+        
         this.start = Date.now()
         this.current = this.start
         this.elapsed = 0
         this.delta = 16
-
+        
+        
         window.requestAnimationFrame(() =>
         {
             this.tick()
@@ -19,6 +22,7 @@ export default class Time extends EventEmitter
 
     }
 
+   
     tick()
     {
         const currentTime = Date.now()
@@ -32,5 +36,7 @@ export default class Time extends EventEmitter
         {
             this.tick()
         })
+        
+        
     }
 }

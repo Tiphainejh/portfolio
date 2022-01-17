@@ -2,6 +2,7 @@ import Main from "../Main.js";
 import Environment from "./Environment.js";
 import Brain from "./Brain.js";
 import Torus from "./Torus.js";
+import Plane from "./Plane.js";
 
 export default class World
 {
@@ -14,16 +15,17 @@ export default class World
         this.sizes = this.main.sizes
         this.nTorus = 5
         this.sectionTorus = []
-        this.container_sections = document.getElementsByClassName("container_section")
         this.objectDistance = 4
-
+        
         //wait for resources
         this.resources.on('ready', () => 
         {
             //setup
-            this.brain = new Brain()
+            //this.brain = new Brain()
+            this.plane = new Plane(this.window.getTopPosition(4))
+
             for (var i = 0; i < this.nTorus; i ++ ) {
-                this.sectionTorus.push(new Torus(this.getTopPosition(i)))
+                this.sectionTorus.push(new Torus(this.window.getTopPosition(i)))
             }
 
             this.environment = new Environment()  
@@ -31,17 +33,22 @@ export default class World
          
     }
 
-    getTopPosition(i)
-    {
-        var element = this.container_sections[i]
-        var topPosition = (element.getBoundingClientRect().top + this.window.scrollY) / this.sizes.height;
-        return topPosition
+    interests()
+    {       
+        if (this.plane)
+            this.plane.animation.actions.current.play()
     }
+
+   
+    
 
     update()
     {
         if (this.brain)
             this.brain.update()
+        
+        if (this.plane)
+            this.plane.update()
 
         if(this.sectionTorus){
             for (var torus of this.sectionTorus)

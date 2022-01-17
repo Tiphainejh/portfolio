@@ -10,7 +10,14 @@ export default class Camera
         this.canvas = this.main.canvas
         this.window = this.main.window
         this.world = this.main.world
+        this.time = this.main.time
+
         this.setInstance()
+        
+        const vFOV = (this.instance.fov * Math.PI) / 180;
+        this.height = 2 * Math.tan(vFOV / 2) * Math.abs(this.instance.position.z);
+        this.width = this.height * this.instance.aspect;
+        
     }
 
     setInstance()
@@ -34,10 +41,9 @@ export default class Camera
     update()
     {
         this.instance.position.y = - this.window.scrollY / this.sizes.height * this.world.objectDistance
-        //console.log(this.instance.position)
-        // const parallaxX = this.window.cursor.x * 0.5  //TODO cursor
-        // const parallaxY = -this.window.cursor.y * 0.5 //TODO cursor
-        // this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * 5 * this.time.deltaTime
-        // this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * 5 * this.time.deltaTime
+        const parallaxX = this.window.cursor.x * 0.5 
+        const parallaxY = -this.window.cursor.y * 0.5 
+        this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * this.time.delta * 0.01
+        this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * this.time.delta * 0.01
     }
 }

@@ -51,6 +51,5 @@ export default class Torus
     {
         this.mesh.rotation.x = this.time.elapsed * 0.00010
         this.mesh.rotation.y = this.time.elapsed * 0.00012
-        //console.log(this.time.elapsed)
     }
 }

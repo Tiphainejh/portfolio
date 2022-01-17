@@ -31,8 +31,8 @@ export default class Main
         //setup
         this.debug = new Debug()
         this.sizes = new Sizes()
-        this.time = new Time()
         this.window = new Window()
+        this.time = new Time()
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
         this.world = new World()
@@ -50,6 +50,16 @@ export default class Main
         {
             this.update()
         })
+
+        this.window.on('interests', () => 
+        {
+            //this.interests()
+        })
+    }
+
+    interests()
+    {
+        this.world.interests()
     }
 
     resize()
