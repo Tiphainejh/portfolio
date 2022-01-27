@@ -1,6 +1,6 @@
 import Main from "../Main.js";
 
-export default class Bain
+export default class Brain
 {
     constructor()
     {
@@ -18,7 +18,8 @@ export default class Bain
        
         //setup
         this.resource = this.resources.items.brainModel
-        
+
+
         this.setModel()
     }
 

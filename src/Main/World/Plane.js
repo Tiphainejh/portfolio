@@ -26,20 +26,23 @@ export default class Plane
         this.resource = this.resources.items.planeModel
         
         this.setModel()
+        this.startPosition = - this.main.camera.width/2
+        this.endPosition = this.main.camera.width/2
+        this.animations = [[0,50], [51, 101]]
         
         this.animationScripts.push({
-            start: 0,
-            end: 50,
+            start: this.animations[0][0],
+            end: this.animations[0][1],
             func: () => {
-                this.model.position.x = this.lerp(- this.main.camera.width/2, 0, this.scalePercent(0, 50))
+                this.model.position.x = this.lerp(this.startPosition, 0, this.scalePercent(this.animations[0][0], this.animations[0][1]))
             },
         })
 
         this.animationScripts.push({
-            start: 51,
-            end: 101,
+            start: this.animations[1][0],
+            end: this.animations[1][1],
             func: () => {
-                this.model.position.x = this.lerp(0, this.main.camera.width/2, this.scalePercent(51, 100))
+                this.model.position.x = this.lerp(0, this.endPosition, this.scalePercent(this.animations[1][0], this.animations[1][1]))
             },
         })
 
@@ -67,8 +70,7 @@ export default class Plane
         this.model = this.resource.scene
         this.model.scale.set(0.005, 0.005, 0.005)
         this.model.rotation.y = Math.PI / 2
-        this.model.position.y = - this.yPosition * this.world.objectDistance
-        
+        this.model.position.y = - this.yPosition * this.world.objectDistance + 2
         this.model.position.x = - this.main.camera.width/2
         this.scene.add(this.model)
     }

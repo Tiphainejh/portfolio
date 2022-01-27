@@ -13,11 +13,6 @@ export default class Torus
         this.yPosition = yPosition
         this.world = this.main.world
 
-        //debug
-        if(this.debug.active)
-        {
-            this.debugFolder = this.debug.ui.addFolder('torus')
-        }
         
         this.setGeometry()
         this.setMaterial()
@@ -44,6 +39,8 @@ export default class Torus
     {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.y = - this.yPosition * this.world.objectDistance
+        //this.mesh.position.x = 2
+        this.mesh.position.x = 1.5
         this.scene.add(this.mesh)
     }
 
