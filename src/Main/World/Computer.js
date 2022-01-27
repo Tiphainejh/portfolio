@@ -42,6 +42,7 @@ export default class Computer
         this.model.position.x = this.xPosition //- this.width
         this.model.position.y = - this.yPosition * this.world.objectDistance - this.height/2 
         this.isClickable = false
+        this.isClicked = false
         this.originalSpacebarColor =  new THREE.Color(0.5, 0.5, 0.4);
 
     }
@@ -57,26 +58,25 @@ export default class Computer
         this.scene.add(this.model)
     }
 
-    changeColor(index)
+    changeColor(element, color)
     {
-        const element = this.model.children[index]
-        element.material.color.set(this.colors[this.currentColor])
-        this.currentColor = (this.currentColor + 1)%this.colors.length
+        element.material.color.set(color)
     }
 
-    changeImage(index)
+    changeImage(element)
     {
-        const element = this.model.children[index]
         var videoName = Object.keys(this.videos)[this.currentImage] 
-        //element.material.map = this.images[this.currentImage] // for images
-        element.material.map = this.videos[videoName]
-
-        document.getElementById(videoName).play()
-        this.videos[videoName].magFilter = THREE.LinearFilter;
+        
+        element.material.map = this.images[this.currentImage] // for images
+        this.currentImage = (this.currentImage + 1)%this.images.length
+        
+        //element.material.map = this.videos[videoName]
+        //document.getElementById(videoName).play()
+        //this.videos[videoName].magFilter = THREE.LinearFilter;
         //this.videos[videoName].minFilter = THREE.NearestFilter;
+        //this.currentImage = (this.currentImage + 1)%Object.keys(this.videos).length
+        
         element.material.needsUpdate = true
-        //this.currentImage = (this.currentImage + 1)%this.images.length
-        this.currentImage = (this.currentImage + 1)%Object.keys(this.videos).length
     }
 
     resize()
@@ -104,7 +104,7 @@ export default class Computer
     update()
     {
         this.boxHelper.update()
-        if(this.camera && this.resources.sceneReady)
+        if(this.camera && this.resources.sceneReady && !this.isClicked)
         {
             this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance);
         
@@ -115,13 +115,13 @@ export default class Computer
                 {
                     if( intersect.object.userData.name == 'spacebar')
                     {
-                        this.getChildByName('spacebar').material.color.set(0xff0000);
+                        this.changeColor(this.getChildByName('spacebar'), 0xff0000)
                         this.isClickable = true
                     }
                 }
 
             } else {
-                this.getChildByName('spacebar').material.color.set(this.originalSpacebarColor);
+                this.changeColor(this.getChildByName('spacebar'), this.originalSpacebarColor)
 
                 this.isClickable = false
             }

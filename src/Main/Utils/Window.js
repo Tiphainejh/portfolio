@@ -21,6 +21,7 @@ export default class Window extends EventEmitter
             y: 0
         }
         this.scrollPercent = 0
+        this.mouseVector = new THREE.Vector3();
 
 
         window.addEventListener('mousemove', (event) => 
@@ -28,7 +29,6 @@ export default class Window extends EventEmitter
             this.cursor.x = event.clientX / this.sizes.width -0.5
             this.cursor.y = event.clientY / this.sizes.height -0.5
 
-            this.mouseVector = new THREE.Vector3();
             this.mouseVector.x = 2 * (event.clientX /  this.sizes.width) - 1;
             this.mouseVector.y = 1 - 2 * ( event.clientY / this.sizes.height );
         })
@@ -46,27 +46,24 @@ export default class Window extends EventEmitter
         this.slideIndex = 0;
         this.showSlides(this.slideIndex);
 
-        var prev = document.getElementById("prev");
-        var next = document.getElementById("next");
-
-
         window.addEventListener('click', () =>
         {
             const computer = this.main.world.computer
-            console.log(computer.isClickable)
             if (computer.isClickable)
+            {
+                computer.isClicked = true
                 this.showSlides(1);
+                const spacebar = computer.getChildByName('spacebar')
+                const screen = computer.getChildByName('screen')
+                computer.changeColor(spacebar, 0x00ff00)
+                computer.changeImage(screen)
+                window.setInterval(() =>
+                {
+                    computer.isClicked = false
+                }, 1000)
+            }
         })
 
-        prev.addEventListener('click', () =>
-        {
-            this.showSlides(-1);
-        })
-
-        next.addEventListener('click', () =>
-        {
-            this.showSlides(1);
-        })
     }
 
     mod(n, m) 

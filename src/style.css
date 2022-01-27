@@ -118,7 +118,7 @@ header{
     font-size: 14px;
     font-weight: 100;
     left: -120px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 4px;
     text-align: center;
     opacity: 0;
@@ -243,7 +243,7 @@ h1{
 
 .position{
     font-weight: bold;
-    font-size:6vw;
+    font-size:5vw;
     text-align: left;
     display: block;
 }
@@ -322,40 +322,4 @@ to {opacity: 1}
 from {opacity: .4}
 to {opacity: 1}
 }
-
-
-.arrow {
-    display: inline-block;
-    overflow: hidden;
-    width: 10vw;
-    height: 10vh;
-    position: absolute;
-    cursor: pointer;
-    transition: 0.6s ease;
-    fill:var(--menu-text-color);
-    user-select: none;
-}
-
-.arrow.prev{
-    bottom: 0vh;
-    left: 0;
-}
-
-.arrow.next{
-    bottom: 5vh;
-    left: 6vw;
-}
-
-.icon > svg {
-    position: relative;
-}
-.arrow > svg {
-    top: 0;
-}
-
-.prev:hover, .next:hover {
-fill: var(--default-color);
-}
-  
-  
 

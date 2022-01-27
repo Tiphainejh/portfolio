@@ -22,7 +22,8 @@ export default class World
         this.nTorus = 5
         this.sectionTorus = []
         this.objectDistance = 4
-        
+        //debug
+
 
         //wait for resources
         this.resources.on('ready', () => 
@@ -38,29 +39,17 @@ export default class World
 
             this.pointsPositions = [
                 {
-                    position: new THREE.Vector3(this.computer.model.position.x, this.computer.model.position.y,this.computer.model.position.z-3),
-                    element: document.querySelector('.point-0')
-                },
-                {
-                    position: new THREE.Vector3(2, -5, -0.6),
+                    position: new THREE.Vector3(this.computer.model.position.x-0.2, this.computer.model.position.y+1,this.computer.model.position.z),
                     element: document.querySelector('.point-1')
-                },
-                {
-                    position: new THREE.Vector3(1.55, -1, -0.6),
-                    element: document.querySelector('.point-2')
                 }
             ]
             this.points = new Points(this.pointsPositions)
 
-            window.setInterval(() =>
-            {
-                this.computer.changeImage(2)
-            }, 1000);
-
             // window.setInterval(() =>
             // {
-            //     this.computer.changeColor(1)
+            //     this.computer.changeImage(2)
             // }, 1000);
+
 
             this.environment = new Environment()  
         })
