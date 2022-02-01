@@ -16,7 +16,8 @@ export default class Environment
         }
         this.setSunLight()
         this.setAmbiantLight()
-        this.setPointLight()
+        this.setPointLight(1.5, -2, 0)
+        this.setPointLight(1.5, -14.5, 0)
     }
 
     setSunLight()
@@ -101,10 +102,10 @@ export default class Environment
         }
     }
 
-    setPointLight()
+    setPointLight(x, y, z)
     {
         this.pointLight = new THREE.PointLight( 0xff0000, 10, 100);
-        this.pointLight.position.set(1.5, -2, 0);
+        this.pointLight.position.set(x, y, z);
         this.scene.add(this.pointLight)
         if(this.debug.active)
         {
@@ -125,7 +126,7 @@ export default class Environment
             this.debugFolder
             .add(this.pointLight.position, 'y')
             .name('pointLightY')
-            .min(-5)
+            .min(-20)
             .max(5)
             .step(0.001)
 

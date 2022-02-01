@@ -97,7 +97,9 @@ export default class Resources extends EventEmitter
             {
                 const video = document.getElementById(source.name);
                 const file = new THREE.VideoTexture(video)
-                file.encoding = THREE.sRGBEncoding;        
+                file.encoding = THREE.sRGBEncoding;    
+                file.magFilter = THREE.LinearFilter;
+                file.minFilter = THREE.NearestFilter;    
                 file.flipY = false;
                 this.sourceLoaded(source, file)
             }

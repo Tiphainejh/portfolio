@@ -72,6 +72,7 @@ export default class Main
     update()
     {
         this.camera.update()
+        this.window.update()
         this.world.update()
         this.renderer.update()
     }

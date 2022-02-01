@@ -25,8 +25,14 @@ export default class Computer
         //setup
         this.resource = this.resources.items.computerModel
         this.currentImage = 0
-        this.images = [this.resources.items.image, this.resources.items.image2]
-        this.videos = {"sphereRadius" : this.resources.items.sphereRadius}
+        this.imageDuration = 0
+        this.images = {
+            0 : [this.resources.items.image0, this.resources.items.image1],
+            1 : [this.resources.items.sphereRadius, this.resources.items.image3],
+            2 : [this.resources.items.image4, this.resources.items.image5],
+            3 : [this.resources.items.image6, this.resources.items.image7]
+        }
+
         this.colors = [0xff0000, 0x00ff00, 0x0000ff]
         this.currentColor = 0
         this.setModel()
@@ -39,11 +45,12 @@ export default class Computer
         this.box3.getSize(this.size);
         this.width = this.size.x
         this.height = this.size.y
-        this.model.position.x = this.xPosition //- this.width
+        this.model.position.x = this.xPosition
         this.model.position.y = - this.yPosition * this.world.objectDistance - this.height/2 
         this.isClickable = false
         this.isClicked = false
         this.originalSpacebarColor =  new THREE.Color(0.5, 0.5, 0.4);
+        this.isPlayingVideo = false
 
     }
 
@@ -52,7 +59,6 @@ export default class Computer
         this.model = this.resource.scene
         this.screen = this.model.children[2]
         this.model.scale.set(0.045, 0.045, 0.045)
-        //this.model.rotation.y = Math.PI/6
         this.model.castShadow = true;
         this.model.receiveShadow = true;
         this.scene.add(this.model)
@@ -62,31 +68,53 @@ export default class Computer
     {
         element.material.color.set(color)
     }
-
-    changeImage(element)
+    
+    changeImage(element, index)
     {
-        var videoName = Object.keys(this.videos)[this.currentImage] 
+        if(this.isPlayingVideo == true)
+        {
+            clearInterval(this.world.displayImages) 
+            this.world.displayImages = window.setInterval(() =>
+            {
+                this.isPlayingVideo = false
+                this.changeImage(this.getChildByName('screen'), this.window.slideIndex)
+            }, 1000)
+        }
+
+        const image = this.images[index][this.currentImage]
+        if (image instanceof THREE.VideoTexture)
+        {
+            const videoID = image.image.id
+            const video = document.getElementById(videoID)
+
+
+            if(video.played.length === 0 || video.ended)
+            {
+                clearInterval(this.world.displayImages) 
+                this.isPlayingVideo = true
+                video.play()
+                window.setTimeout(() =>
+                {
+                    clearInterval(this.world.displayImages) // in case the function is called before we got here
+                    this.world.displayImages = window.setInterval(() =>
+                    {  
+                        this.isPlayingVideo = false
+                        this.changeImage(this.getChildByName('screen'), this.window.slideIndex)
+                    }, 1000)
+                }, video.duration * 1000)
+ 
+            }
+            
+        }
         
-        element.material.map = this.images[this.currentImage] // for images
-        this.currentImage = (this.currentImage + 1)%this.images.length
-        
-        //element.material.map = this.videos[videoName]
-        //document.getElementById(videoName).play()
-        //this.videos[videoName].magFilter = THREE.LinearFilter;
-        //this.videos[videoName].minFilter = THREE.NearestFilter;
-        //this.currentImage = (this.currentImage + 1)%Object.keys(this.videos).length
-        
+        element.material.map = image
         element.material.needsUpdate = true
+        this.currentImage = (this.currentImage + 1)%this.images[index].length
     }
 
     resize()
     {
         this.xPosition = this.main.camera.width/4
-        // this.boxHelper.update()
-        // this.box3.getSize(this.size);
-        // this.width = this.size.x
-        // this.model.position.x = this.xPosition - this.width
-        // this.model.position.y = - this.yPosition * this.world.objectDistance - this.height/2 
     }
 
     getChildByName(name)
@@ -122,7 +150,6 @@ export default class Computer
 
             } else {
                 this.changeColor(this.getChildByName('spacebar'), this.originalSpacebarColor)
-
                 this.isClickable = false
             }
         }

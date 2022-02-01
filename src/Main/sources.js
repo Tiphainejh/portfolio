@@ -29,14 +29,44 @@ export default [
         ]
     },
     {
-        name: 'image',
+        name: 'image0',
         type: 'texture',
-        path: 'textures/image.jpg'
+        path: 'textures/image0.jpg'
+    },
+    {
+        name: 'image1',
+        type: 'texture',
+        path: 'textures/image1.jpg'
     },
     {
         name: 'image2',
         type: 'texture',
         path: 'textures/image2.jpg'
+    },
+    {
+        name: 'image3',
+        type: 'texture',
+        path: 'textures/image3.jpg'
+    },
+    {
+        name: 'image4',
+        type: 'texture',
+        path: 'textures/image4.jpg'
+    },
+    {
+        name: 'image5',
+        type: 'texture',
+        path: 'textures/image5.jpg'
+    },
+    {
+        name: 'image6',
+        type: 'texture',
+        path: 'textures/image6.jpg'
+    },
+    {
+        name: 'image7',
+        type: 'texture',
+        path: 'textures/image7.jpg'
     },
     {
         name: 'sphereRadius',

@@ -33,18 +33,25 @@ export default class Window extends EventEmitter
             this.mouseVector.y = 1 - 2 * ( event.clientY / this.sizes.height );
         })
 
+        const range = 100;
         window.addEventListener('wheel', () =>
         {
+            this.hideSections()
+
             this.detectTrackPad()
         })
 
         window.addEventListener('scroll', () =>
         {
+            this.hideSections()
+
             this.detectTrackPad()
         })
 
         this.slideIndex = 0;
         this.showSlides(this.slideIndex);
+
+        this.pages = document.querySelectorAll('.container_section')
 
         window.addEventListener('click', () =>
         {
@@ -56,13 +63,18 @@ export default class Window extends EventEmitter
                 const spacebar = computer.getChildByName('spacebar')
                 const screen = computer.getChildByName('screen')
                 computer.changeColor(spacebar, 0x00ff00)
-                computer.changeImage(screen)
+                computer.changeImage(screen, this.slideIndex)
+                computer.currentImage = 0
+
+
                 window.setInterval(() =>
                 {
                     computer.isClicked = false
                 }, 1000)
             }
         })
+
+        
 
     }
 
@@ -107,6 +119,17 @@ export default class Window extends EventEmitter
         this.scrollPercent = (windowBottom - elementTop) / this.planeSection.getBoundingClientRect().height * 100;
     }
 
+    hideSections()
+    {
+        for(var i = 0; i< this.pages.length; i++)
+        {
+            if (window.scrollY < this.pages[i].offsetTop )
+                this.pages[i].classList.add('visible')
+            else
+            this.pages[i].classList.remove('visible');
+        }
+    }
+
     getTopPosition(section)
     {
         var element = this.containerSections[section]
@@ -114,4 +137,18 @@ export default class Window extends EventEmitter
         return topPosition
     }
 
+    update()
+    {
+        // for(var i = 0; i< this.pages.length; i++)
+        // {
+        //     if(i == this.currentSection)
+        //     {
+        //         this.pages[i].classList.add('visible')
+        //     }
+        //     else
+        //     {
+        //         this.pages[i].classList.remove('visible')
+        //     }
+        // }
+    }
 }
