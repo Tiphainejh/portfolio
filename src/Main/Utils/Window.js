@@ -15,13 +15,17 @@ export default class Window extends EventEmitter
         this.containerSections = document.getElementsByClassName("container_section")
         this.interestsSection = this.containerSections[4]
         this.planeSection = document.getElementById("plane_section")
+        this.educationSection = document.getElementById("education")
+        this.workSection = document.getElementById("work")
         this.navElements = ["about_nav", "work_nav", "skills_nav", "education_nav", "interests_nav"]
         this.cursor = {
             x: 0,
             y: 0
         }
-        this.scrollPercent = 0
+        this.planeSectionScrollPercent = 0
+        this.educationSectionScrollPercent = 0
         this.mouseVector = new THREE.Vector3();
+        this.objectDistance = 4
 
 
         window.addEventListener('mousemove', (event) => 
@@ -33,7 +37,7 @@ export default class Window extends EventEmitter
             this.mouseVector.y = 1 - 2 * ( event.clientY / this.sizes.height );
         })
 
-        const range = 100;
+        
         window.addEventListener('wheel', () =>
         {
             this.hideSections()
@@ -114,9 +118,21 @@ export default class Window extends EventEmitter
             }
         }
 
+        //TODO organise
+        this.planeSectionScrollPercent = this.getScrollPercent(this.planeSection)
+        this.educationScrollPercent = this.getScrollPercent(this.educationSection)
+        this.workScrollPercent = this.getScrollPercent(this.workSection)
+    }
+
+    getScrollPercent(section)
+    {
         var windowBottom = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.clientHeight;
-        var elementTop = this.planeSection.getBoundingClientRect().top + this.scrollY
-        this.scrollPercent = (windowBottom - elementTop) / this.planeSection.getBoundingClientRect().height * 100;
+        return (windowBottom - this.getTopHTMLPosition(section)) / section.getBoundingClientRect().height * 100;
+    }
+
+    getTopHTMLPosition(element)
+    {
+        return element.getBoundingClientRect().top + this.scrollY
     }
 
     hideSections()
@@ -130,11 +146,11 @@ export default class Window extends EventEmitter
         }
     }
 
-    getTopPosition(section)
+    getTopWorldPosition(section)
     {
         var element = this.containerSections[section]
-        var topPosition = (element.getBoundingClientRect().top + this.scrollY) / this.sizes.height;
-        return topPosition
+        var topPosition = this.getTopHTMLPosition(element) / this.sizes.height;
+        return topPosition * this.objectDistance
     }
 
     update()

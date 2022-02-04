@@ -8,7 +8,8 @@ export default class Environment
         this.main = new Main()
         this.scene = this.main.scene
         this.debug = this.main.debug
-
+        this.world = this.main.world
+        this.education = this.world.education
         //debug
         if(this.debug.active)
         {
@@ -16,128 +17,187 @@ export default class Environment
         }
         this.setSunLight()
         this.setAmbiantLight()
-        this.setPointLight(1.5, -2, 0)
-        this.setPointLight(1.5, -14.5, 0)
+        
+        this.world.computer.pointLight = this.setPointLight(1.5, -2, 0)
+        this.world.plane.pointLight = this.setPointLight(1.5, -14.5, 0)
+        this.education.namsan.pointLight = this.setPointLight(0, 0, 0)
+        this.education.campus.pointLight = this.setPointLight(0, 0, 0)
+        this.education.business.pointLight = this.setPointLight(0, 0, 0)
+
     }
 
-    setSunLight()
+    setRectLight()
     {
-        this.sunLight = new THREE.DirectionalLight(0xffffff, 1)
-        this.sunLight.position.set(4, 4, 0)
-        this.sunLight.castShadow = true
-        this.sunLight.shadow.mapSize.set(1024, 1024)
-        this.sunLight.shadow.camera.far = 15
-        this.sunLight.shadow.camera.left = - 7
-        this.sunLight.shadow.camera.top = 7
-        this.sunLight.shadow.camera.right = 7
-        this.sunLight.shadow.camera.bottom = - 7
-        this.scene.add(this.sunLight)
+        const width = 10;
+        const height = 10;
+        const intensity = 100;
+        const rectLight = new THREE.RectAreaLight( 0x0000ff, intensity,  width, height );
+        rectLight.position.set( 5, 5, 0 );
+        rectLight.lookAt( 0, 0, 0 );
+        this.scene.add( rectLight )
 
         if(this.debug.active)
         {
             this.debugFolder
-            .add(this.sunLight, 'intensity')
-            .name('sunlightintensity')
+            .add(rectLight, 'intensity')
+            .name('rectlightintensity')
             .min(0)
-            .max(10)
+            .max(100)
             .step(0.001)
 
             this.debugFolder
-            .add(this.sunLight.position, 'x')
+            .add(rectLight.position, 'x')
             .name('sunlightX')
             .min(-5)
             .max(5)
             .step(0.001)
 
             this.debugFolder
-            .add(this.sunLight.position, 'y')
+            .add(rectLight.position, 'y')
             .name('sunlightY')
             .min(-5)
             .max(5)
             .step(0.001)
 
             this.debugFolder
-            .add(this.sunLight.position, 'z')
+            .add(rectLight.position, 'z')
             .name('sunlightZ')
             .min(-10)
             .max(10)
             .step(0.001)
         }
+
+    }
+    setSunLight()
+    {
+        var sunLight = new THREE.DirectionalLight(0xffffff, 1)
+        sunLight.position.set(4, 4, 0)
+        sunLight.castShadow = true
+        sunLight.shadow.mapSize.set(1024, 1024)
+        sunLight.shadow.camera.far = 15
+        sunLight.shadow.camera.left = - 7
+        sunLight.shadow.camera.top = 7
+        sunLight.shadow.camera.right = 7
+        sunLight.shadow.camera.bottom = - 7
+        this.scene.add(sunLight)
+
+        if(this.debug.active)
+        {
+            this.debugFolder
+            .add(sunLight, 'intensity')
+            .name('sunlightintensity')
+            .min(0)
+            .max(10)
+            .step(0.001)
+
+            this.debugFolder
+            .add(sunLight.position, 'x')
+            .name('sunlightX')
+            .min(-5)
+            .max(5)
+            .step(0.001)
+
+            this.debugFolder
+            .add(sunLight.position, 'y')
+            .name('sunlightY')
+            .min(-5)
+            .max(5)
+            .step(0.001)
+
+            this.debugFolder
+            .add(sunLight.position, 'z')
+            .name('sunlightZ')
+            .min(-10)
+            .max(10)
+            .step(0.001)
+        }
+        return sunLight
     }
 
     setAmbiantLight()
     {
-        this.ambientLight = new THREE.AmbientLight(0xffffff, 1)
-        this.ambientLight.position.set(-2, 1, 0)
-        this.scene.add(this.ambientLight)
+        var ambientLight = new THREE.AmbientLight(0xffffff, 1)
+        ambientLight.position.set(-2, 1, 0)
+        this.scene.add(ambientLight)
         if(this.debug.active)
         {
             this.debugFolder
-            .add(this.ambientLight, 'intensity')
+            .add(ambientLight, 'intensity')
             .name('ambientLighttintensity')
             .min(0)
             .max(10)
             .step(0.001)
 
             this.debugFolder
-            .add(this.ambientLight.position, 'x')
+            .add(ambientLight.position, 'x')
             .name('ambientLightX')
             .min(-5)
             .max(5)
             .step(0.001)
 
             this.debugFolder
-            .add(this.ambientLight.position, 'y')
+            .add(ambientLight.position, 'y')
             .name('ambientLightY')
             .min(-5)
             .max(5)
             .step(0.001)
 
             this.debugFolder
-            .add(this.ambientLight.position, 'z')
+            .add(ambientLight.position, 'z')
             .name('ambientLightZ')
             .min(-10)
             .max(10)
             .step(0.001)
         }
+        return ambientLight
     }
 
     setPointLight(x, y, z)
     {
-        this.pointLight = new THREE.PointLight( 0xff0000, 10, 100);
-        this.pointLight.position.set(x, y, z);
-        this.scene.add(this.pointLight)
+        var pointLight = new THREE.PointLight( 0xff0000, 10, 100);
+        pointLight.position.set(x, y, z);
+        this.scene.add(pointLight)
+        
+        // const sphereSize = 1;
+        // const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+        // this.scene.add( pointLightHelper );
+        
         if(this.debug.active)
         {
             this.debugFolder
-            .add(this.pointLight, 'intensity')
+            .add(pointLight, 'intensity')
             .name('pointLighttintensity')
             .min(0)
             .max(200)
             .step(0.001)
 
             this.debugFolder
-            .add(this.pointLight.position, 'x')
+            .add(pointLight.position, 'x')
             .name('pointLightX')
             .min(-5)
             .max(5)
             .step(0.001)
 
             this.debugFolder
-            .add(this.pointLight.position, 'y')
+            .add(pointLight.position, 'y')
             .name('pointLightY')
             .min(-20)
             .max(5)
             .step(0.001)
 
             this.debugFolder
-            .add(this.pointLight.position, 'z')
+            .add(pointLight.position, 'z')
             .name('pointLightZ')
             .min(-10)
             .max(10)
             .step(0.001)
         }
+
+        return pointLight
     }
 
+    update()
+    {
 
+    }
 }

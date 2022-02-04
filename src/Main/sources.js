@@ -29,6 +29,38 @@ export default [
         ]
     },
     {
+        name: 'trModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/tr.glb'
+        ]
+    },
+    {
+        name: 'namsanModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/namsan.glb'
+        ]
+    },
+    {
+        name: 'campusModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/campus.glb'
+        ]
+    },
+    {
+        name: 'businessModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/business.glb'
+        ]
+    },
+    {
         name: 'image0',
         type: 'texture',
         path: 'textures/image0.jpg'

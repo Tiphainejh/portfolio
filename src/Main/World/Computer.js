@@ -46,7 +46,7 @@ export default class Computer
         this.width = this.size.x
         this.height = this.size.y
         this.model.position.x = this.xPosition
-        this.model.position.y = - this.yPosition * this.world.objectDistance - this.height/2 
+        this.model.position.y = - this.yPosition - this.height/2 
         this.isClickable = false
         this.isClicked = false
         this.originalSpacebarColor =  new THREE.Color(0.5, 0.5, 0.4);
@@ -127,31 +127,50 @@ export default class Computer
             }
         }
     }
+    isHovered()
+    {
+        this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance);
+        
+        // calculate objects intersecting the picking ray
+        var intersects = this.raycaster.intersectObjects(this.model.children);
+        if (intersects.length > 0) {
+            for(const intersect of intersects)
+            {
+                if( intersect.object.userData.name == 'spacebar')
+                {
+                    this.changeColor(this.getChildByName('spacebar'), 0xff0000)
+                    this.isClickable = true
+                }
+            }
 
+        } else {
+            this.changeColor(this.getChildByName('spacebar'), this.originalSpacebarColor)
+            this.isClickable = false
+        }
+    }
+    
+    checkScrollPercent()
+    {
+        if(this.window.workScrollPercent > 50 && this.window.workScrollPercent < 150)
+        {
+            this.pointLight.intensity = 10
+            this.isHovered()
+        }
+        else
+        {
+
+            this.pointLight.intensity = 0
+
+        }
+    }
 
     update()
     {
         this.boxHelper.update()
+        
         if(this.camera && this.resources.sceneReady && !this.isClicked)
         {
-            this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance);
-        
-            // calculate objects intersecting the picking ray
-            var intersects = this.raycaster.intersectObjects(this.model.children);
-            if (intersects.length > 0) {
-                for(const intersect of intersects)
-                {
-                    if( intersect.object.userData.name == 'spacebar')
-                    {
-                        this.changeColor(this.getChildByName('spacebar'), 0xff0000)
-                        this.isClickable = true
-                    }
-                }
-
-            } else {
-                this.changeColor(this.getChildByName('spacebar'), this.originalSpacebarColor)
-                this.isClickable = false
-            }
+            this.checkScrollPercent()
         }
         
     }

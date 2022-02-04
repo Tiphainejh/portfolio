@@ -38,7 +38,6 @@ export default class Main
         this.world = new World()
         this.camera = new Camera()
         this.renderer = new Renderer()
-        
         //sizes resize event
         this.sizes.on('resize', () => 
         {

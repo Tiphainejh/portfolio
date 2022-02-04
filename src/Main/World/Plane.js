@@ -31,8 +31,8 @@ export default class Plane
                 endPosition : this.main.camera.width/2 - 2
             },
             y : {
-                startPosition : - this.yPosition * this.world.objectDistance + 2,
-                endPosition : - this.yPosition * this.world.objectDistance + 2
+                startPosition : - this.yPosition + 2,
+                endPosition : - this.yPosition + 2
             },
             z : {
                 startPosition : 0,
@@ -191,13 +191,12 @@ export default class Plane
     }
     
     scalePercent(start, end) {
-        return (this.window.scrollPercent - start) / (end - start)
+        return (this.window.planeSectionScrollPercent - start) / (end - start)
     }
     
     playScrollAnimations() {
         this.animationScripts.forEach((a) => {
-            if (this.window.scrollPercent >= a.start && this.window.scrollPercent < a.end) {
-                console.log(this.window.scrollPercent)
+            if (this.window.planeSectionScrollPercent >= a.start && this.window.planeSectionScrollPercent < a.end) {
                 a.func()
             }
         })
@@ -208,7 +207,7 @@ export default class Plane
         this.model = this.resource.scene
         this.model.scale.set(0.009, 0.009, 0.009)
         this.model.rotation.y = Math.PI / 2
-        this.model.position.y = - this.yPosition * this.world.objectDistance + 2
+        this.model.position.y = - this.yPosition + 2
         this.model.position.x = this.positions.x.startPosition
         this.scene.add(this.model)
     }
@@ -217,5 +216,16 @@ export default class Plane
     update()
     {  
         this.playScrollAnimations()
+        if(this.window.planeSectionScrollPercent > 50 && this.window.planeSectionScrollPercent < 150)
+        {
+            this.model.visible = true
+            this.pointLight.intensity = 10
+        }
+        else
+        {
+            this.model.visible = false
+            this.pointLight.intensity = 0
+
+        }
     }
 }

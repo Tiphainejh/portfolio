@@ -8,6 +8,8 @@ import Particles from "./Particles.js";
 import Overlay from "./Overlay.js";
 import * as THREE from 'three'
 import Points from "./Points.js";
+import TR from "./TR.js";
+import Education from "./Education.js";
 
 export default class World
 {
@@ -19,10 +21,10 @@ export default class World
         this.window = this.main.window
         this.sizes = this.main.sizes
         this.debug = this.main.debug
+        this.time = this.main.time
         this.overlay = new Overlay()
         this.nTorus = 5
         this.sectionTorus = []
-        this.objectDistance = 4
         
         //debug
         if(this.debug.active)
@@ -35,12 +37,16 @@ export default class World
         {
 
             //setup
-            //this.particles = new Particles(this.window.getTopPosition(1))
-            this.computer = new Computer(this.window.getTopPosition(1))
-            this.plane = new Plane(this.window.getTopPosition(4))
-            this.sectionTorus.push(new Torus(this.window.getTopPosition(0)))
-            this.sectionTorus.push(new Torus(this.window.getTopPosition(3)))
-            this.sectionTorus.push(new Torus(this.window.getTopPosition(4)))
+            //this.particles = new Particles(this.window.getTopWorldPosition(1))
+            //this.tr = new TR()
+
+            
+            this.computer = new Computer(this.window.getTopWorldPosition(1))
+            this.plane = new Plane(this.window.getTopWorldPosition(4))
+            this.education = new Education()
+            //this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(0)))
+            //this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(3)))
+            this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(4)))
 
             this.pointsPositions = [
                 {
@@ -101,6 +107,12 @@ export default class World
     {   
         if(this.points)
             this.points.update()
+        
+        if(this.environment)
+            this.environment.update()
+
+        if(this.tr)
+            this.tr.update()
 
         if (this.particles)
             this.particles.update()
@@ -120,5 +132,12 @@ export default class World
                 torus.update()
             }
         }
+        
+       
+        if(this.education)
+        {
+            this.education.update()
+        }
+
     }
 }
