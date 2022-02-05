@@ -38,7 +38,7 @@ export default class Building
                 child.name = this.name
                 if(child.material.name == 'Blue')
                 {
-                    const material1 = new THREE.MeshPhysicalMaterial({
+                    const material = new THREE.MeshPhysicalMaterial({
                         roughness: 0.06,
                         reflectivity: 0.9,
                         clearcoat: 1,
@@ -47,7 +47,7 @@ export default class Building
                         metalness:0.3,
                         color: 0x267494
                     });
-                    child.material = material1
+                    child.material = material
                    
                 }
             }

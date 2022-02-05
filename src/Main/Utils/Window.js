@@ -16,6 +16,7 @@ export default class Window extends EventEmitter
         this.interestsSection = this.containerSections[4]
         this.planeSection = document.getElementById("plane_section")
         this.educationSection = document.getElementById("education")
+        
         this.workSection = document.getElementById("work")
         this.navElements = ["about_nav", "work_nav", "skills_nav", "education_nav", "interests_nav"]
         this.cursor = {
@@ -27,7 +28,16 @@ export default class Window extends EventEmitter
         this.mouseVector = new THREE.Vector3();
         this.objectDistance = 4
 
-
+        var closebtns = document.getElementsByClassName("close");
+        var i;
+        
+        /* Loop through the elements, and hide the parent, when clicked on */
+        for (i = 0; i < closebtns.length; i++) {
+          closebtns[i].addEventListener("click", function() {
+            this.parentElement.style.display = 'none';
+          });
+        }
+        
         window.addEventListener('mousemove', (event) => 
         {
             this.cursor.x = event.clientX / this.sizes.width -0.5
@@ -41,14 +51,12 @@ export default class Window extends EventEmitter
         window.addEventListener('wheel', () =>
         {
             this.hideSections()
-
             this.detectTrackPad()
         })
 
         window.addEventListener('scroll', () =>
         {
             this.hideSections()
-
             this.detectTrackPad()
         })
 
@@ -76,6 +84,12 @@ export default class Window extends EventEmitter
                     computer.isClicked = false
                 }, 1000)
             }
+
+            const education = this.main.world.education
+            if (education.isClickable)
+            {
+                education.hasBeenClicked()
+            }
         })
 
         
@@ -89,7 +103,7 @@ export default class Window extends EventEmitter
 
     showSlides(n)
     {
-        var slides = document.getElementsByClassName("mySlides");
+        var slides = document.getElementsByClassName("slides");
         this.slideIndex = this.mod(this.slideIndex+=n, slides.length)
 
         for (var slide of slides)
@@ -139,10 +153,14 @@ export default class Window extends EventEmitter
     {
         for(var i = 0; i< this.pages.length; i++)
         {
-            if (window.scrollY < this.pages[i].offsetTop )
+            if ((window.scrollY) < this.pages[i].offsetTop )
+            {
                 this.pages[i].classList.add('visible')
+            }
             else
-            this.pages[i].classList.remove('visible');
+            {
+                this.pages[i].classList.remove('visible');
+            }
         }
     }
 

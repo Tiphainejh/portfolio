@@ -20,7 +20,8 @@ export default class Education
         this.xPosition = xPosition
         this.zPosition = zPosition
         this.canRotate = true
-        
+        this.isClickable = false
+
         //setup
         const x = 25
         const middleX = x * 0.5
@@ -42,6 +43,13 @@ export default class Education
             this.allObjects.push(child)
         })
 
+        this.popups = {
+            "master" : document.getElementById("master"),
+            "bachelor" : document.getElementById("bachelor"),
+            "dulcac" : document.getElementById("dulcac"),
+            "poei" : document.getElementById("poei")
+        }
+
     }
 
     rotate()
@@ -61,42 +69,45 @@ export default class Education
     }
 
 
-    isHovered()
+    hasBeenClicked()
     {
-        if(this.camera && this.resources.sceneReady)
-        {
-            this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance);
-            var intersects = this.raycaster.intersectObjects(this.allObjects);
+        this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance);
+        var intersects = this.raycaster.intersectObjects(this.allObjects);
 
-            if (intersects.length > 0) {
-                
-                this.stopRotation()
-                
-                for(const intersect of intersects)
-                {
-                    switch (intersect.object.name) {
-                        case 'Namsan':
-                          console.log('Namsan');
-                          break;
-                        case 'Campus':
-                            console.log("Campus")
+        if (intersects.length > 0) {
+            
+            // this.stopRotation()
+            
+            for(const intersect of intersects)
+            {
+                switch (intersect.object.name) {
+                    case 'Namsan':
+                        this.displayText('dulcac');
                         break;
-                        case 'Business':
-                          console.log('Business');
-                          break;
-                        default:
-                          console.log(`Sorry, we are out of ${expr}.`);
-                      }
-                }
+                    case 'Campus':
+                        this.displayText("master")
+                    break;
+                    case 'Business':
+                        this.displayText('poei');
+                        break;
+                    }
+            }
 
-            } else {
-                this.canRotate = true
-                for (const building of this.buildings)
-                {
-                    building.canRotate = true
-                }
+        } else {
+            this.canRotate = true
+            for (const building of this.buildings)
+            {
+                building.canRotate = true
             }
         }
+    }
+
+    displayText(section)
+    {
+        for (let p in this.popups)
+            this.popups[p].style.display = "none";
+
+       this.popups[section].style.display = "block";
     }
 
     checkScrollPercent()
@@ -108,7 +119,7 @@ export default class Education
             {
                 building.pointLight.intensity = 10
             }
-            this.isHovered()
+            this.isClickable = true
         }
         else
         {
@@ -116,6 +127,7 @@ export default class Education
             for (const building of this.buildings)
             {
                 building.pointLight.intensity = 0
+                this.isClickable = false
             }
 
         }
