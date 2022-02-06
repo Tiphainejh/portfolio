@@ -13,6 +13,7 @@ export default class Building
         this.xPosition = xPosition
         this.zPosition = zPosition
         this.pointLight = null
+        this.points = []
         this.canRotate = true
 
         //setup
@@ -69,7 +70,36 @@ export default class Building
     update()
     {
        this.rotate()
+        if(this.points)
+        {
+            for (const point of this.points)
+            {
+                var position = new THREE.Vector3();
+                position.setFromMatrixPosition(this.model.matrixWorld);
+                position.y += 5
+                position.z += 1
+                const name = point.element.className.split(' ')[1]
+                const buildingName = name.split("-")[0]
 
+                switch (buildingName)
+                {
+                    case 'campus':
+                        if(name.split("-")[1] == 'master')
+                            position.x -= 2
+                        else
+                            position.x += 5
+                        point.position.copy(position)
+                        break
+                    case 'campus':
+                        point.position.copy(position)
+                        break
+                    case 'namsan':
+                    case 'business':
+                        point.position.copy(position)
+                        break
+                }
+            }
+        }
         if(this.pointLight)
         {
             var position = new THREE.Vector3();

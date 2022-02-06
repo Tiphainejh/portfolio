@@ -355,7 +355,7 @@ to {opacity: 1}
     font-size: 30px;
   }
   
-.close:hover {background: #bbb;}
+.close:hover {color: #bbb;}
 
 /* 
 .overlay {

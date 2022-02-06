@@ -10,12 +10,39 @@ export default class Points
         this.resources = this.main.resources
         this.window = this.main.window
         this.sizes = this.main.sizes
+        this.world = this.main.world
+        this.education = this.world.education
         
         this.raycaster = new Raycaster()
 
         this.points = points
 
         this.camera = this.main.camera
+
+        for (const point of this.points)
+        {
+            const name = point.element.className.split(' ')[1].split("-")[0]
+
+            switch (name) {
+                case 'namsan':
+                case 'campus':
+                case 'business':
+                    this.education[name].points.push(point)
+                    break;
+                }
+            // switch (point.element.className.split(' ')[1]) {
+            //     case 'namsan':
+            //         this.education.namsan.points.push(point)
+            //         break;
+            //     case 'master':
+            //     case 'bachelor':
+            //         this.education.campus.points.push(point)
+            //     break;
+            //     case 'business':
+            //         this.education.business.points.push(point)
+            //         break;
+            //     }
+        }
     }
 
 
@@ -25,6 +52,7 @@ export default class Points
         {
             for (const point of this.points)
             {
+
                 const screenPosition = point.position.clone()
                 screenPosition.project(this.camera.instance)
             
