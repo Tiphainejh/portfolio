@@ -1,225 +1,235 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiphaine RICHARD</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiphaine RICHARD</title>
 </head>
+
 <body>
   <header class="page-header">
-    <div><a class="title" onclick="window.scrollTo(0, 0); behavior: 'smooth';">Tiphaine RICHARD</a></div>
-</header>
-    <nav class="main-nav">
-        <ul class="nav">
-            <li><a id="about_nav" onclick="window.scrollTo(0, 0);">ABOUT</a></li>
-            <li><a id="work_nav" href="#work">WORK</a></li>
-            <li><a id="skills_nav" href="#skills">SKILLS</a></li>
-            <li><a id="education_nav" href="#education">EDUCATION</a></li>
-            <li><a id="interests_nav" href="#interests">INTERESTS</a></li>
-        </ul>
-    </nav>
-    
-    
-    <canvas class="webgl"></canvas>
-    <div class="loading-bar"></div>
-    
-    <div class="point point-1">
-      <div class="label">1</div>
-      <div class="text">Clic on the spacebar to get to the next point.</div>
-    </div>
+    <div><a class="top-title" onclick="window.scrollTo(0, 0); behavior: 'smooth';">Tiphaine RICHARD</a></div>
+  </header>
+  <nav class="main-nav">
+    <ul class="nav">
+      <li><a id="about_nav" onclick="window.scrollTo(0, 0);">ABOUT</a></li>
+      <li><a id="work_nav" href="#work">WORK</a></li>
+      <li><a id="skills_nav" href="#skills">SKILLS</a></li>
+      <li><a id="education_nav" href="#education">EDUCATION</a></li>
+      <li><a id="interests_nav" href="#interests">INTERESTS</a></li>
+    </ul>
+  </nav>
 
-    <div class="point campus-master">
-      <div class="label">1</div>
-      <div class="text">Master's degree</div>
-    </div>
 
-    <div class="point campus-bachelor">
-      <div class="label">2</div>
-      <div class="text">Bachelor’s degree</div>
-    </div>
+  <canvas class="webgl"></canvas>
+  <div class="loading-bar"></div>
 
-    <div class="point namsan">
-      <div class="label">3</div>
-      <div class="text">University degree</div>
-    </div>
+  <div class="point point-1">
+    <div class="label">1</div>
+    <div class="text">Click on the spacebar to get to the next point.</div>
+  </div>
 
-    <div class="point business">
-      <div class="label">4</div>
-      <div class="text">DevOps Ingeneer</div>
-    </div>
+  <div class="container">
+    <section id="about" class="container_section visible">
+      <div id="name">Tiphaine RICHARD</div>
+    </section>
 
-    
-    <div class="container">
-      <section id="about" class="container_section visible">
-        <div id="name">Tiphaine RICHARD</div>
-      </section>
-      
-      <section id="work" class="container_section">
-        <h1>WORK</h1>
-        <div id="work_content"> 
-          <div class="slides fade">
-            <div>
-              <span class="position">SYSTEM ENGINEER</span> 
-            </div>
-            <div class="description">
-              <span class="company">Sopra Steria</span> <span class="duration">May 2021 – Now</span> <span class="location">Nantes, France</span>
-            </div>
-            <div class="acomplishments">
-              <ul>
-                <li>Application package production (InstallShield2019, VBScript, PowerShell).</li>
-                <li>ZENworks integration and control of the applications’ integrity on the workstations.</li>
-              </ul>
-            </div>
+    <section id="work" class="container_section">
+      <h1>WORK</h1>
+      <div id="work_content">
+        <div class="slides fade">
+          <div>
+            <span class="position">SYSTEM ENGINEER</span>
           </div>
+          <div class="description">
+            <span class="company">Sopra Steria</span> <span class="duration">May 2021 – Now</span> <span
+              class="location">Nantes, France</span>
+          </div>
+          <div class="acomplishments">
+            <ul>
+              <li>Application package production (InstallShield2019, VBScript, PowerShell).</li>
+              <li>ZENworks integration and control of the applications’ integrity on the workstations.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slides fade">
+          <div>
+            <span class="position">PYTHON DEVELOPER (INTERN)</span>
+          </div>
+          <div class="description">
+            <span class="company">École de Technologie Supérieure</span> <span class="duration">February 2020 – August
+              2020</span><span class="location">Montréal, Canada</span>
+          </div>
+          <div class="acomplishments">
+            <ul>
+              <li>Implemented a programmable volume rendering system within the 3DSlicer platform in Python.</li>
+              <li>Managed the automatically generated interface of the module according to the parameters of the desired
+                rendering method.</li>
+              <li>Implemented various rendering methods in the module in GLSL.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slides fade">
+          <div>
+            <span class="position">PHP WEB DEVELOPER (INTERN)</span>
+          </div>
+          <div class="description">
+            <span class="company">Lyon Visa Services</span> <span class="duration">June 2018 – August 2018</span> <span
+              class="location">Lyon, France</span>
+          </div>
+          <div class="acomplishments">
+            <ul>
+              <li> Created a database and its associated back office with Doctrine and Sonata.</li>
+              <li>Filled the database with datas homogenized through the use of regular expressions.</li>
+              <li>Enhanced the website visuals and ergonomics.</li>
+              <li>Added features to the website and participated to its deployment.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slides fade">
+          <div>
+            <span class="position">PYTHON DEVELOPER (INTERN)</span>
+          </div>
+          <div class="description">
+            <span class="company">iTus Informatique</span> <span class="duration">June 2016 – Jully 2016</span> <span
+              class="location">Eckbolsheim, France</span>
+          </div>
+          <div class="acomplishments">
+            <ul>
+              <li>Developed a graphical interface in Python in order to manage the import of datas in the company’s
+                database</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="container_section">
+      <h1>SKILLS</h1>
+      test de texte
+    </section>
+
+    <section id="education" class="container_section">
+
+      <h1>EDUCATION</h1>
+      Click on the buildings to see my education in detail.
+      <div id="master" class="popups">
+        <div class="collapible-content">
+          <button type="button" class="collapsible">&#8645;</button>
+          <span class="close">&#10005;</span>
           
-          <div class="slides fade">
+          <div class="edu-content">
             <div>
-              <span class="position">PYTHON DEVELOPER (INTERN)</span>
+              <span class="title">Master’s degree in Computer Science : Image, Virtual Reality, Interactions and
+                Games</span>
             </div>
             <div class="description">
-              <span class="company">École de Technologie Supérieure</span> <span class="duration">February 2020 – August 2020</span><span class="location">Montréal, Canada</span>
+              <span class="company">University of Strasboug</span><span class="duration">2018 – 2020</span><span
+                class="location">Strasbourg, France</span>
             </div>
             <div class="acomplishments">
+              <ul class="twocols">
+                <li>3D Graphics Programming.</li>
+                <li>Web Development.</li>
+                <li>Image Processing.</li>
+                <li>3D Geometric Modeling.</li>
+                <li>Virtual Reality.</li>
+                <li>Deep Learning.</li>
+              </ul>
               <ul>
-                <li>Implemented a programmable volume rendering system within the 3DSlicer platform in Python.</li>
-                <li>Managed the automatically generated interface of the module according to the parameters of the desired rendering method.</li>
-                <li>Implemented various rendering methods in the module in GLSL.</li>
+                <li>Study & Research Work : Murine hepatic vascular network 3D segmentation, creation of its
+                  representation as a graph.</li>
+                <li>Master Project : 2D segmentation of ocular vessels and automation of their analysis.</li>
               </ul>
             </div>
-          </div>
 
-          <div class="slides fade">
             <div>
-              <span class="position">PHP WEB DEVELOPER (INTERN)</span> 
+              <span class="title">Bachelor’s degree in Computer Science : Image, Virtual Reality, Interactions and
+                Games</span>
             </div>
             <div class="description">
-              <span class="company">Lyon Visa Services</span> <span class="duration">June 2018 – August 2018</span> <span class="location">Lyon, France</span>
+              <span class="company">University of Strasboug</span><span class="duration">2015 – 2018</span><span
+                class="location">Strasbourg, France</span>
             </div>
             <div class="acomplishments">
               <ul>
-                <li> Created a database and its associated back office with Doctrine and Sonata.</li>
-                <li>Filled the database with datas homogenized through the use of regular expressions.</li>
-                <li>Enhanced the website visuals and ergonomics.</li>
-                <li>Added features to the website and participated to its deployment.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="slides fade">
-            <div>
-              <span class="position">PYTHON DEVELOPER (INTERN)</span> 
-            </div>
-            <div class="description">
-              <span class="company">iTus Informatique</span> <span class="duration">June 2016 – Jully 2016</span> <span class="location">Eckbolsheim, France</span>
-            </div>
-            <div class="acomplishments">
-              <ul>
-                <li>Developed a graphical interface in Python in order to manage the import of datas in the company’s database</li>
+                <li>Databases and Web Programming.</li>
+                <li>Geometry for 3D.</li>
+                <li>Probability and Statistics.</li>
               </ul>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="skills" class="container_section">
-        <h1>SKILLS</h1>
-        test de texte
-      </section>
-
-      <section id="education" class="container_section">
-
-        
-        <h1>EDUCATION</h1>
-        <div id="master" class="popups">
+      <div id="dulcac" class="popups">
+        <div class="collapible-content">
+          <button type="button" class="collapsible">&#8645;</button>
           <span class="close">&#10005;</span>
-          <div>
-            <span class="position">Master’s degree in Computer Science : Image, Virtual Reality, Interactions and Games</span> 
-          </div>
-          <div class="description">
-            <span class="company">University of Strasboug</span> <span class="duration">2018 – 2020</span> <span class="location">Strasbourg, France</span>
-          </div>
-          <div class="acomplishments">
-            <ul class="twocols">
-              <li>3D Graphics Programming.</li>
-              <li>Web Development.</li>
-              <li>Image Processing.</li>
-              <li>3D Geometric Modeling.</li>
-              <li>Virtual Reality.</li>
-              <li>Deep Learning.</li>
-            </ul> 
-            <ul>
-              <li>Study & Research Work : Murine hepatic vascular network 3D segmentation, creation of its representation as a graph.</li>
-              <li>Master Project : 2D segmentation of ocular vessels and automation of their analysis.</li>
-            </ul>
+          <div class="edu-content">
+            <div>
+              <span class="title">University degree : Korean Language, Culture and Arts</span>
+            </div>
+            <div class="description">
+              <span class="company">University of Nantes</span><span class="duration">September 2021 - June
+                2022</span><span class="location">Nantes, France</span>
+            </div>
+            <div class="acomplishments">
+              <ul>
+                <li>History and Geography of Korea.</li>
+                <li>The university system and culture in Korea.</li>
+                <li>Culture, Arts and News.</li>
+                <li>Thematic conferences.</li>
+              </ul>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div id="bachelor" class="popups">
+      <div id="poei" class="popups">
+        <div class="collapible-content">
+          <button type="button" class="collapsible">&#8645;</button>
           <span class="close">&#10005;</span>
-          <div>
-            <span class="position">Bachelor’s degree in Computer Science : Image, Virtual Reality, Interactions and Games</span> 
+
+          <div class="edu-content">
+            <div>
+              <span class="title">DevOps Engineer</span>
+            </div>
+            <div class="description">
+              <span class="company">AJC ingénierie</span><span class="duration">February 2021 - May 2021</span><span
+                class="location">Strasbourg, France</span>
+            </div>
+            <div class="acomplishments">
+              <ul>
+                <li>Administer and operate a Linux infrastructure.</li>
+                <li>The challenges of the Devops methodology.</li>
+                <li>Set up a CI/CD Platform.</li>
+                <li>Establish an AWS Cloud.</li>
+              </ul>
+            </div>
           </div>
-          <div class="description">
-            <span class="company">University of Strasboug</span> <span class="duration">2015 – 2018</span> <span class="location">Strasbourg, France</span>
-          </div>
-          <div class="acomplishments">
-            <ul>
-              <li>Databases and Web Programming.</li>
-              <li>Geometry for 3D.</li>
-              <li>Probability and Statistics.</li>
-            </ul>
-          </div>
+
         </div>
-
-        <div id="dulcac" class="popups">
-          <span class="close">&#10005;</span>
-          <div>
-            <span class="position">University degree : Korean Language, Culture and Arts</span> 
-          </div>
-          <div class="description">
-            <span class="company">University of Nantes</span> <span class="duration">September 2021 - June 2022</span> <span class="location">Nantes, France</span>
-          </div>
-          <div class="acomplishments">
-            <ul>
-              <li>History and Geography of Korea.</li>
-              <li>The university system and culture in Korea.</li>
-              <li>Culture, Arts and News.</li>
-              <li>Thematic conferences.</li>
-            </ul>
-          </div>
-        </div>  
-
-        <div id="poei" class="popups">
-          <span class="close">&#10005;</span>
-          <div>
-            <span class="position">DevOps Ingeneer</span> 
-          </div>
-          <div class="description">
-            <span class="company">AJC ingénierie</span> <span class="duration">February 2021 - May 2021</span> <span class="location">Strasbourg, France</span>
-          </div>
-          <div class="acomplishments">
-            <ul>
-              <li>Administer and operate a Linux infrastructure.</li>
-              <li>The challenges of the Devops methodology.</li>
-              <li>Set up a CI/CD Platform.</li>
-              <li>Establish an AWS Cloud.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
 
-      <section id="interests" class="container_section">
-        <h1>INTERESTS</h1>
-        <div id="plane_section"></div>
-        test de texte  
-      </section>
+    <section id="interests" class="container_section">
+      <h1>INTERESTS</h1>
+      <div id="plane_section"></div>
+      test de texte
+    </section>
 
-      <video id="sphereRadius"playsinline webkit-playsinline muted autoplay width="320" height="240" src="/textures/sphereRadius.mp4" style="display:none"></video>
-    </div>
-    
+    <video id="sphereRadius" playsinline webkit-playsinline muted autoplay width="320" height="240"
+      src="/textures/sphereRadius.mp4" style="display:none"></video>
+  </div>
+
 </body>
+
 </html>

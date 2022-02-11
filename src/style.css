@@ -23,6 +23,7 @@ html
     font-family: var(--font);
     background: var(--background-color);
     color: var(--menu-text-color);
+    overflow-x: hidden;
 }
 
 .webgl
@@ -190,7 +191,7 @@ ul.nav li a:hover{
 }
 
 
-a.title {
+a.top-title {
     display: block;
     text-decoration: none;
     position:fixed;
@@ -337,7 +338,7 @@ to {opacity: 1}
 }
 
 
-.popups{
+/* .popups{
     display: none;
     backdrop-filter: blur(10px);
     background: rgba(51,51,51,0.7);
@@ -345,7 +346,44 @@ to {opacity: 1}
     min-height: 75vh;
     padding: 2vw;
     margin: 10px auto;
+} */
+
+
+.popups{
+    display: none;
+    height: 30%;
+    padding: 2vw;
+    position: fixed; 
+    bottom: 0%;
+    width: 85%;
+    margin: 10px auto;
+    
 }
+
+
+.collapsible {
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    margin-left: auto; 
+    margin-right: auto; 
+    outline: none;
+    background: none;
+    font-size: 15px;
+    display: block;
+  }
+
+  .collapsed, .collapsible:hover {
+    color: #ccc;
+  } 
+  
+.collapible-content {
+    position: absolute;
+    width: 100%;
+    top:50%;
+    backdrop-filter: blur(10px);
+}
+
 
 .close {
     cursor: pointer;
@@ -368,3 +406,15 @@ to {opacity: 1}
     background: rgba(51,51,51,0.7);
     z-index: 10;
   } */
+
+
+  .title{
+    font-weight: bold;
+    font-size:3vw;
+    text-align: left;
+    display: block;
+  }
+
+    .education{
+        font-size: 1vw;
+    }

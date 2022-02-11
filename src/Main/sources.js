@@ -109,5 +109,10 @@ export default [
         name: 'particles',
         type: 'texture',
         path: 'textures/particles/10.png'
+    },
+    {
+        name: 'josefin',
+        type: 'font',
+        path: 'fonts/Josefin Sans Thin_Regular.json'
     }
 ]

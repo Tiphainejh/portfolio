@@ -63,6 +63,7 @@ export default class Resources extends EventEmitter
         this.loaders = {}
         this.loaders.gltfLoader = new GLTFLoader(this.loadingManager)
         this.loaders.textureLoader = new THREE.TextureLoader(this.loadingManager)
+        this.loaders.fontLoader = new THREE.FontLoader(this.loadingManager)
     }
 
     startLoading()
@@ -102,6 +103,16 @@ export default class Resources extends EventEmitter
                 file.minFilter = THREE.NearestFilter;    
                 file.flipY = false;
                 this.sourceLoaded(source, file)
+            }
+            else if(source.type === 'font')
+            {
+                this.loaders.fontLoader.load(
+                    source.path,
+                    (file) =>
+                    {
+                        this.sourceLoaded(source, file)
+                    }
+                )
             }
             
         }

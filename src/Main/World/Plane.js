@@ -28,11 +28,11 @@ export default class Plane
         this.positions = {
             x : {
                 startPosition : - this.main.camera.width/2 - 2,
-                endPosition : this.main.camera.width/2 - 2
+                endPosition : this.main.camera.width/2 - 1
             },
             y : {
                 startPosition : - this.yPosition + 2,
-                endPosition : - this.yPosition + 2
+                endPosition : - this.yPosition
             },
             z : {
                 startPosition : 0,

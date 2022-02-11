@@ -20,9 +20,8 @@ export default class Environment
         
         this.world.computer.pointLight = this.setPointLight(1.5, -2, 0)
         this.world.plane.pointLight = this.setPointLight(1.5, -14.5, 0)
-        this.education.namsan.pointLight = this.setPointLight(0, 0, 0)
-        this.education.campus.pointLight = this.setPointLight(0, 0, 0)
-        this.education.business.pointLight = this.setPointLight(0, 0, 0)
+        this.education.pointLight = this.setSunLight(0, 0, 0)
+
 
     }
 
@@ -68,9 +67,10 @@ export default class Environment
         }
 
     }
+
     setSunLight()
     {
-        var sunLight = new THREE.DirectionalLight(0xffffff, 1)
+        var sunLight = new THREE.DirectionalLight(0xff0000, 1)
         sunLight.position.set(4, 4, 0)
         sunLight.castShadow = true
         sunLight.shadow.mapSize.set(1024, 1024)
@@ -79,6 +79,8 @@ export default class Environment
         sunLight.shadow.camera.top = 7
         sunLight.shadow.camera.right = 7
         sunLight.shadow.camera.bottom = - 7
+        // const helper = new THREE.DirectionalLightHelper( sunLight, 5 );
+        // this.scene.add(helper);
         this.scene.add(sunLight)
 
         if(this.debug.active)

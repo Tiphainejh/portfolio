@@ -12,8 +12,6 @@ export default class Building
         this.debug = this.main.debug
         this.xPosition = xPosition
         this.zPosition = zPosition
-        this.pointLight = null
-        this.points = []
         this.canRotate = true
 
         //setup
@@ -27,7 +25,7 @@ export default class Building
     setModel()
     {
         this.model = this.resource.scene
-        var scale = 1
+        var scale = 0.15
         this.model.scale.set(scale, scale, scale)
         this.model.position.set(this.xPosition, 0, this.zPosition)
         this.model.rotation.y = - Math.PI /2
@@ -37,6 +35,8 @@ export default class Building
             if (child instanceof THREE.Mesh)
             {                
                 child.name = this.name
+                child.castShadow = true
+                child.receiveShadow = true
                 if(child.material.name == 'Blue')
                 {
                     const material = new THREE.MeshPhysicalMaterial({
@@ -55,6 +55,30 @@ export default class Building
         })
     }
 
+    hide()
+    {
+        this.model.traverse((child) => 
+        {
+            if (child instanceof THREE.Mesh)
+            {                
+               child.visible = false
+            }
+        })
+
+    }
+
+    show()
+    {
+        this.model.traverse((child) => 
+        {
+            if (child instanceof THREE.Mesh)
+            {                
+               child.visible = true
+            }
+        })
+    }
+
+
     rotate()
     {
         if(this.canRotate)
@@ -69,46 +93,10 @@ export default class Building
 
     update()
     {
-       this.rotate()
-        if(this.points)
-        {
-            for (const point of this.points)
-            {
-                var position = new THREE.Vector3();
-                position.setFromMatrixPosition(this.model.matrixWorld);
-                position.y += 5
-                position.z += 1
-                const name = point.element.className.split(' ')[1]
-                const buildingName = name.split("-")[0]
+        this.rotate()
 
-                switch (buildingName)
-                {
-                    case 'campus':
-                        if(name.split("-")[1] == 'master')
-                            position.x -= 2
-                        else
-                            position.x += 5
-                        point.position.copy(position)
-                        break
-                    case 'campus':
-                        point.position.copy(position)
-                        break
-                    case 'namsan':
-                    case 'business':
-                        point.position.copy(position)
-                        break
-                }
-            }
-        }
-        if(this.pointLight)
-        {
-            var position = new THREE.Vector3();
-            position.setFromMatrixPosition(this.model.matrixWorld);
-            this.pointLight.position.copy(position)
-            // this.pointLight.position.x -= 0.5
-            this.pointLight.position.y += 5
-            // this.pointLight.position.z += 5
-        }
+        var position = new THREE.Vector3();
+        position.setFromMatrixPosition(this.model.matrixWorld);
 
     }
 }

@@ -29,6 +29,9 @@ export default class Points
                 case 'business':
                     this.education[name].points.push(point)
                     break;
+                case 'education':
+                    this.education.point = point
+                    break;
                 }
             // switch (point.element.className.split(' ')[1]) {
             //     case 'namsan':
@@ -53,35 +56,39 @@ export default class Points
             for (const point of this.points)
             {
 
-                const screenPosition = point.position.clone()
-                screenPosition.project(this.camera.instance)
-            
-                this.raycaster.setFromCamera(screenPosition, this.camera.instance)
-                const intersect = this.raycaster.intersectObjects(this.scene.children, true)
-                if(intersect.length === 0)
+                if (point.isVisible)
                 {
-                    point.element.classList.add('visible')
-                }
-                else
-                {
-                    const intersectionDistance = intersect[0].distance
-                    const pointDistance = point.position.distanceTo(this.camera.instance.position)
-
-                    if(intersectionDistance < pointDistance)
-                    {
-                        point.element.classList.remove('visible')
-                    }
-                    else
+                    const screenPosition = point.position.clone()
+                    screenPosition.project(this.camera.instance)
+                
+                    this.raycaster.setFromCamera(screenPosition, this.camera.instance)
+                    const intersect = this.raycaster.intersectObjects(this.scene.children, true)
+                    if(intersect.length === 0)
                     {
                         point.element.classList.add('visible')
                     }
+                    else
+                    {
+                        const intersectionDistance = intersect[0].distance
+                        const pointDistance = point.position.distanceTo(this.camera.instance.position)
+    
+                        if(intersectionDistance < pointDistance)
+                        {
+                            point.element.classList.remove('visible')
+                        }
+                        else
+                        {
+                            point.element.classList.add('visible')
+                        }
+                    }
+
+                    const translateX = screenPosition.x * this.sizes.width * 0.5
+                    const translateY = - screenPosition.y * this.sizes.height * 0.5 + this.window.scrollY 
+    
+                    point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
                 }
 
 
-                const translateX = screenPosition.x * this.sizes.width * 0.5
-                const translateY = - screenPosition.y * this.sizes.height * 0.5 + this.window.scrollY 
-
-                point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
             }
         }
     }

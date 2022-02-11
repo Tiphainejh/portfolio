@@ -9,14 +9,13 @@ export default class Window extends EventEmitter
         super()
         this.main = new Main()
         this.sizes = this.main.sizes
-        this.world = this.main.world
         this.scrollY = window.scrollY
         this.currentSection = 0
         this.containerSections = document.getElementsByClassName("container_section")
         this.interestsSection = this.containerSections[4]
-        this.planeSection = document.getElementById("plane_section")
+        this.planeSection = document.getElementById("interests")
         this.educationSection = document.getElementById("education")
-        
+        this.html = document.body.parentElement
         this.workSection = document.getElementById("work")
         this.navElements = ["about_nav", "work_nav", "skills_nav", "education_nav", "interests_nav"]
         this.cursor = {
@@ -27,15 +26,34 @@ export default class Window extends EventEmitter
         this.educationSectionScrollPercent = 0
         this.mouseVector = new THREE.Vector3();
         this.objectDistance = 4
+        this.cssVariables = getComputedStyle(document.querySelector(':root'))
 
         var closebtns = document.getElementsByClassName("close");
-        var i;
-        
-        /* Loop through the elements, and hide the parent, when clicked on */
         for (i = 0; i < closebtns.length; i++) {
-          closebtns[i].addEventListener("click", function() {
-            this.parentElement.style.display = 'none';
-          });
+            closebtns[i].addEventListener("click", (btn) =>
+             {
+                console.log("im closing")
+                btn.target.parentElement.style.display = 'none';
+                this.main.world.education.closePopup()
+            });
+          }
+
+
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", (collapsible) => {
+                var centered = collapsible.target.parentElement
+                var content = centered.firstElementChild
+                // var popups = collapsible.target.parentElement
+                // var height = content.scrollHeight - centered.scrollHeight
+
+                    collapsible.target.classList.toggle("active");
+                if (collapsible.target.classList.contains('active')){
+                    centered.setAttribute("style",`top:-5%; transition: top 1s;`);
+                } else {
+                    centered.setAttribute("style",`top:50%; transition: top 1s;`);
+                } 
+        });
         }
         
         window.addEventListener('mousemove', (event) => 
@@ -115,9 +133,8 @@ export default class Window extends EventEmitter
     detectTrackPad(e) {
         this.scrollY = window.scrollY
         const newSection = Math.round(this.scrollY / this.sizes.height)
-        var css_var_s = getComputedStyle(document.querySelector(':root'))
-        var menuTextColorHover = css_var_s.getPropertyValue('--default-color')
-        var menuTextColor = css_var_s.getPropertyValue('--menu-text-color')
+        var menuTextColorHover = this.cssVariables.getPropertyValue('--default-color')
+        var menuTextColor = this.cssVariables.getPropertyValue('--menu-text-color')
 
         if (newSection != this.currentSection && newSection != (this.navElements.length))
         {

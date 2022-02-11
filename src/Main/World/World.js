@@ -51,23 +51,8 @@ export default class World
             this.pointsPositions = [
                 {
                     position: new THREE.Vector3(this.computer.model.position.x-0.2, this.computer.model.position.y+1,this.computer.model.position.z-1),
-                    element: document.querySelector('.point-1')
-                },
-                {
-                    position: new THREE.Vector3(this.education.campus.model.position.x, this.education.campus.model.position.y,this.education.campus.model.position.z),
-                    element: document.querySelector('.campus-master')
-                },
-                {
-                    position: new THREE.Vector3(this.education.campus.model.position.x, this.education.campus.model.position.y,this.education.campus.model.position.z),
-                    element: document.querySelector('.campus-bachelor')
-                },
-                {
-                    position: new THREE.Vector3(this.education.namsan.model.position.x, this.education.namsan.model.position.y,this.education.namsan.model.position.z),
-                    element: document.querySelector('.namsan')
-                },
-                {
-                    position: new THREE.Vector3(this.education.business.model.position.x, this.education.business.model.position.y,this.education.business.model.position.z),
-                    element: document.querySelector('.business')
+                    element: document.querySelector('.point-1'),
+                    isVisible: true
                 }
             ]
 

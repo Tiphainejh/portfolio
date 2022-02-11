@@ -16,40 +16,64 @@ export default class Education
         this.world = this.main.world
         this.environment = this.world.environment
         this.raycaster = new THREE.Raycaster();
-
+        this.pointLight = null
         this.xPosition = xPosition
         this.zPosition = zPosition
         this.canRotate = true
         this.isClickable = false
+        this.focusedObject = null
+        this.cameraPositionBefore = new THREE.Vector3()
 
         //setup
-        const x = 25
-        const middleX = x * 0.5
-        const z = x * 0.87
-        const middleZ = z * 0.5
+        let x = 4
+        let middleX = x * 0.5
+        let z = x * 0.87
+        let middleZ = z * 0.5
         
+        this.setSun()
+
         this.namsan = new Building(- middleX, - middleZ, this.resources.items.namsanModel, "Namsan")
-        this.campus = new Building(middleX*0.5, - middleZ, this.resources.items.campusModel, "Campus")
+        this.campus = new Building(middleX, - middleZ, this.resources.items.campusModel, "Campus")
         this.business = new Building(0, middleZ, this.resources.items.businessModel, "Business")
+
         this.group = new THREE.Group()
-        this.group.position.set(0, -this.window.getTopWorldPosition(3) - this.camera.height, -30)
+        this.group.position.set(0, -this.window.getTopWorldPosition(3) - this.camera.height/4, 0)
+
         this.group.add(this.namsan.model, this.campus.model, this.business.model)
         this.scene.add(this.group)
 
-        this.buildings = [this.namsan, this.campus, this.business]
         this.allObjects = []
+        
         this.group.traverse((child) => 
         {
             this.allObjects.push(child)
         })
 
         this.popups = {
-            "master" : document.getElementById("master"),
-            "bachelor" : document.getElementById("bachelor"),
-            "dulcac" : document.getElementById("dulcac"),
-            "poei" : document.getElementById("poei")
+            "master" : { 
+                'element' : document.getElementById("master"),
+                'building' : this.campus
+            },
+            "dulcac" : {
+                'element' : document.getElementById("dulcac"),
+                'building' : this.namsan
+            },
+            "poei" : {
+                'element' : document.getElementById("poei"),
+                'building' : this.business
+            }
         }
 
+    }
+
+
+    setSun()
+    {
+        const geometry = new THREE.SphereGeometry(0.5, 32, 16)
+        const material = new THREE.MeshBasicMaterial( {color: 0xffff00 })
+        this.sun = new THREE.Mesh(geometry, material)
+        this.sun.position.set(0, -this.window.getTopWorldPosition(3) + 1, 0)
+        this.scene.add(this.sun)
     }
 
     rotate()
@@ -62,12 +86,26 @@ export default class Education
     {
         this.group.rotation.y = this.group.rotation.y
         this.canRotate = false
-        for (const building of this.buildings)
+        for (let p in this.popups)
         {
-            building.stopRotation()
+            this.popups[p]['building'].stopRotation()
         }
+
     }
 
+    closePopup()
+    {
+        this.camera.instance.position.copy(this.cameraPositionBefore)
+        this.camera.isNotFocused = true
+        this.focusedObject = null
+        this.isClickable = true
+        this.window.html.style.background = this.window.cssVariables.getPropertyValue('--background-color')
+
+        for (let p in this.popups)
+        {
+            this.popups[p]['building'].show()
+        }
+    }
 
     hasBeenClicked()
     {
@@ -82,70 +120,101 @@ export default class Education
             {
                 switch (intersect.object.name) {
                     case 'Namsan':
-                        this.displayText('dulcac');
+                        this.displayText('dulcac', intersect.object);
                         break;
                     case 'Campus':
-                        this.displayText("master")
+                        this.displayText("master", intersect.object)
                     break;
                     case 'Business':
-                        this.displayText('poei');
+                        this.displayText('poei', intersect.object);
                         break;
                     }
             }
 
         } else {
             this.canRotate = true
-            for (const building of this.buildings)
+            for (let p in this.popups)
             {
-                building.canRotate = true
+                this.popups[p]['building'].canRotate = true
             }
+
         }
     }
-
-    displayText(section)
+    
+    displayText(section, object = none)
     {
+        this.camera.isNotFocused = false
+        this.focusedObject = object
+        this.cameraPositionBefore.setFromMatrixPosition(this.camera.instance.matrixWorld);
+        this.window.html.style.background = 'white'
+        this.isClickable = false
+        
         for (let p in this.popups)
-            this.popups[p].style.display = "none";
+        {
+            this.popups[p]['element'].style.display = "none";
+            this.popups[p]['building'].hide()
+        }
 
-       this.popups[section].style.display = "block";
+        this.popups[section]['element'].style.display = "block";
+        this.popups[section]['building'].show()
     }
 
-    checkScrollPercent()
+    isVisible()
     {
         if(this.window.educationScrollPercent > 50 && this.window.educationScrollPercent < 150)
+            return true
+        else
+            return false
+    }
+
+    showGroup()
+    {
+        if(this.camera.isNotFocused)
         {
             this.group.visible = true
-            for (const building of this.buildings)
+            this.rotate()
+        
+            for (let p in this.popups)
             {
-                building.pointLight.intensity = 10
+                this.popups[p]['building'].update()
             }
+    
             this.isClickable = true
         }
-        else
-        {
-            this.group.visible = false
-            for (const building of this.buildings)
-            {
-                building.pointLight.intensity = 0
-                this.isClickable = false
-            }
 
-        }
+    }
+
+    hideGroup()
+    {
+
+        this.group.visible = false
+        this.isClickable = false
     }
 
 
 
     update()
     {
+        if (this.isVisible())
+            this.showGroup()
+        else
+            this.hideGroup()
 
-        this.checkScrollPercent()
-
-        this.rotate()
-        
-        for (const building of this.buildings)
+        if(this.pointLight)
         {
-            building.update()
+            var position = new THREE.Vector3();
+            position.setFromMatrixPosition(this.group.matrixWorld);
+            this.pointLight.position.copy(position)
+            this.pointLight.position.y += 2
         }
 
+        if(!this.camera.isNotFocused && this.focusedObject!=null)
+        {
+            var position = new THREE.Vector3();
+            position.setFromMatrixPosition(this.focusedObject.matrixWorld);
+            position.z += 5
+            this.camera.instance.position.copy(position)
+        }
+    
     }
 }
