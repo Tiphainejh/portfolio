@@ -14,7 +14,7 @@ export default class Plane
         this.debug = this.main.debug
         this.yPosition = yPosition
         this.animationScripts = []
-    
+        this.pointLight = null
 
         //debug
         if(this.debug.active)
@@ -216,16 +216,22 @@ export default class Plane
     update()
     {  
         this.playScrollAnimations()
-        if(this.window.planeSectionScrollPercent > 50 && this.window.planeSectionScrollPercent < 150)
+        if (this.pointLight)
         {
-            this.model.visible = true
-            this.pointLight.intensity = 10
+            var position = new THREE.Vector3();
+            position.setFromMatrixPosition(this.model.matrixWorld);
+            this.pointLight.position.copy(position)
         }
-        else
-        {
-            this.model.visible = false
-            this.pointLight.intensity = 0
+        // if(this.window.planeSectionScrollPercent > 50 && this.window.planeSectionScrollPercent < 150)
+        // {
+        //     this.model.visible = true
+        //     this.pointLight.intensity = 10
+        // }
+        // else
+        // {
+        //     this.model.visible = false
+        //     this.pointLight.intensity = 0
 
-        }
+        // }
     }
 }

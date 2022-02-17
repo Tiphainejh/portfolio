@@ -19,7 +19,7 @@ export default class Environment
         this.setAmbiantLight()
         
         this.world.computer.pointLight = this.setPointLight(1.5, -2, 0)
-        this.world.plane.pointLight = this.setPointLight(1.5, -14.5, 0)
+        this.world.interests.plane.pointLight = this.setPointLight(0, 0, 0)
         this.education.pointLight = this.setSunLight(0, 0, 0)
 
 

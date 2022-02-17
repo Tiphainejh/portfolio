@@ -4,7 +4,8 @@
     /* --background-color: radial-gradient(circle, #E6EBE0 0%, #F4F1BB 100%);
     --menu-text-color: #ED6A5A;
     --default-color: #5D576B;  */
-    --background-color: radial-gradient(circle, #FDCEB9 0%, #FDCEB9 100%);
+    /* --background-color: radial-gradient(circle, #FDCEB9 0%, #FDCEB9 100%); */
+    --background-color: rgb(253, 206, 185);
     --menu-text-color: #D885A3;
     --default-color: #655D8A;
     --top-margin: 30px;
@@ -24,6 +25,7 @@ html
     background: var(--background-color);
     color: var(--menu-text-color);
     overflow-x: hidden;
+    /* transition: background 1s; */
 }
 
 .webgl
@@ -338,15 +340,6 @@ to {opacity: 1}
 }
 
 
-/* .popups{
-    display: none;
-    backdrop-filter: blur(10px);
-    background: rgba(51,51,51,0.7);
-    width: 60vw;
-    min-height: 75vh;
-    padding: 2vw;
-    margin: 10px auto;
-} */
 
 
 .popups{

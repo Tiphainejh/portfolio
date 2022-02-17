@@ -108,7 +108,7 @@ export default [
     {
         name: 'particles',
         type: 'texture',
-        path: 'textures/particles/10.png'
+        path: 'textures/particles/9.png'
     },
     {
         name: 'josefin',

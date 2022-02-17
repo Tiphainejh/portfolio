@@ -2,14 +2,13 @@ import Main from "../Main.js";
 import Environment from "./Environment.js";
 import Brain from "./Brain.js";
 import Torus from "./Torus.js";
-import Plane from "./Plane.js";
 import Computer from "./Computer.js";
-import Particles from "./Particles.js";
 import Overlay from "./Overlay.js";
 import * as THREE from 'three'
 import Points from "./Points.js";
 import TR from "./TR.js";
 import Education from "./Education.js";
+import Interests from "./Interests.js";
 
 export default class World
 {
@@ -37,16 +36,16 @@ export default class World
         {
 
             //setup
-            //this.particles = new Particles(this.window.getTopWorldPosition(1))
+            //
             //this.tr = new TR()
 
             
             this.computer = new Computer(this.window.getTopWorldPosition(1))
-            this.plane = new Plane(this.window.getTopWorldPosition(4))
             this.education = new Education()
+            this.interests = new Interests()
             //this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(0)))
             //this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(3)))
-            this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(4)))
+            // this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(4)))
 
             this.pointsPositions = [
                 {
@@ -94,11 +93,7 @@ export default class World
          
     }
 
-    interests()
-    {       
-        if (this.plane)
-            this.plane.animation.actions.current.play()
-    }
+
 
     resize()
     {
@@ -108,7 +103,10 @@ export default class World
 
     update()
     {   
-       
+              
+        if(this.interests)
+            this.interests.update()
+
         if(this.environment)
             this.environment.update()
 
@@ -124,8 +122,7 @@ export default class World
         if (this.computer)
             this.computer.update()
         
-        if (this.plane)
-            this.plane.update()
+
 
         if(this.sectionTorus){
             for (var torus of this.sectionTorus)

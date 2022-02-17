@@ -113,9 +113,7 @@ export default class Education
         var intersects = this.raycaster.intersectObjects(this.allObjects);
 
         if (intersects.length > 0) {
-            
-            // this.stopRotation()
-            
+                        
             for(const intersect of intersects)
             {
                 switch (intersect.object.name) {
@@ -145,10 +143,11 @@ export default class Education
     {
         this.camera.isNotFocused = false
         this.focusedObject = object
-        this.cameraPositionBefore.setFromMatrixPosition(this.camera.instance.matrixWorld);
+        if (this.camera.instance.position.z == 6)
+            this.cameraPositionBefore.setFromMatrixPosition(this.camera.instance.matrixWorld);
+
         this.window.html.style.background = 'white'
         this.isClickable = false
-        
         for (let p in this.popups)
         {
             this.popups[p]['element'].style.display = "none";
@@ -161,7 +160,7 @@ export default class Education
 
     isVisible()
     {
-        if(this.window.educationScrollPercent > 50 && this.window.educationScrollPercent < 150)
+        if(this.window.educationSectionScrollPercent > 50 && this.window.educationSectionScrollPercent < 200)
             return true
         else
             return false
@@ -212,7 +211,8 @@ export default class Education
         {
             var position = new THREE.Vector3();
             position.setFromMatrixPosition(this.focusedObject.matrixWorld);
-            position.z += 5
+            position.z += 4
+            position.y += 1
             this.camera.instance.position.copy(position)
         }
     

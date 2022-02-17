@@ -76,7 +76,7 @@ export default class Camera
             this.instance.position.y = - this.window.scrollY / this.sizes.height * this.window.objectDistance
         const parallaxX = this.window.cursor.x * 0.5 
         const parallaxY = -this.window.cursor.y * 0.5 
-        this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * this.time.delta * 0.003
-        this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * this.time.delta * 0.003
+        this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * this.time.delta * 0.0015
+        this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * this.time.delta * 0.0015
     }
 }

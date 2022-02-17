@@ -15,8 +15,10 @@ export default class Window extends EventEmitter
         this.interestsSection = this.containerSections[4]
         this.planeSection = document.getElementById("interests")
         this.educationSection = document.getElementById("education")
-        this.html = document.body.parentElement
+        this.interestsSection = document.getElementById("interests")
         this.workSection = document.getElementById("work")
+    
+        this.html = document.body.parentElement
         this.navElements = ["about_nav", "work_nav", "skills_nav", "education_nav", "interests_nav"]
         this.cursor = {
             x: 0,
@@ -24,6 +26,9 @@ export default class Window extends EventEmitter
         }
         this.planeSectionScrollPercent = 0
         this.educationSectionScrollPercent = 0
+        this.interestsSectionScrollPercent = 0
+        this.workSectionScrollPercent = 0
+        
         this.mouseVector = new THREE.Vector3();
         this.objectDistance = 4
         this.cssVariables = getComputedStyle(document.querySelector(':root'))
@@ -32,8 +37,7 @@ export default class Window extends EventEmitter
         for (i = 0; i < closebtns.length; i++) {
             closebtns[i].addEventListener("click", (btn) =>
              {
-                console.log("im closing")
-                btn.target.parentElement.style.display = 'none';
+                btn.target.parentElement.parentElement.style.display = 'none';
                 this.main.world.education.closePopup()
             });
           }
@@ -47,7 +51,7 @@ export default class Window extends EventEmitter
                 // var popups = collapsible.target.parentElement
                 // var height = content.scrollHeight - centered.scrollHeight
 
-                    collapsible.target.classList.toggle("active");
+                collapsible.target.classList.toggle("active");
                 if (collapsible.target.classList.contains('active')){
                     centered.setAttribute("style",`top:-5%; transition: top 1s;`);
                 } else {
@@ -123,7 +127,6 @@ export default class Window extends EventEmitter
     {
         var slides = document.getElementsByClassName("slides");
         this.slideIndex = this.mod(this.slideIndex+=n, slides.length)
-
         for (var slide of slides)
             slide.style.display = "none";
 
@@ -151,8 +154,9 @@ export default class Window extends EventEmitter
 
         //TODO organise
         this.planeSectionScrollPercent = this.getScrollPercent(this.planeSection)
-        this.educationScrollPercent = this.getScrollPercent(this.educationSection)
-        this.workScrollPercent = this.getScrollPercent(this.workSection)
+        this.educationSectionScrollPercent = this.getScrollPercent(this.educationSection)
+        this.workSectionScrollPercent = this.getScrollPercent(this.workSection)
+        this.interestsSectionScrollPercent = this.getScrollPercent(this.interestsSection)
     }
 
     getScrollPercent(section)

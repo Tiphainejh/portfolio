@@ -50,16 +50,8 @@ export default class Main
             this.update()
         })
 
-        this.window.on('interests', () => 
-        {
-            //this.interests()
-        })
     }
 
-    interests()
-    {
-        this.world.interests()
-    }
 
     resize()
     {
