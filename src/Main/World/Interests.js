@@ -28,7 +28,7 @@ export default class Interests
 
     isVisible()
     {
-        if(this.window.interestsSectionScrollPercent > 0 && this.window.interestsSectionScrollPercent < 100)
+        if(this.window.interestsSectionScrollPercent > 0 && this.window.interestsSectionScrollPercent < 150)
             return true
         else
             return false

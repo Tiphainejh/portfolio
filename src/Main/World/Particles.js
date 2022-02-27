@@ -57,9 +57,9 @@ export default class Particles
             const i3 = i * 3
 
             // positions[i] = (Math.random() - 0.5) * 8
-            positions[i3    ] = (Math.random() - 0.5) * (this.camera.width + 2)
+            positions[i3    ] = (Math.random() - 0.5) * (this.camera.width * 1.5)
             positions[i3 + 1] = Math.pow(Math.random(), 5) * (Math.random() < 0.5 ? 1 : - 1) * 7
-            positions[i3 + 2] = (Math.random() - 0.5) * (this.camera.width + 2)
+            positions[i3 + 2] = (Math.random() - 0.5) * (this.camera.width * 1.5)
 
             colors[i3    ] = 1
             colors[i3 + 1] = 1

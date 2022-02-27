@@ -158,9 +158,9 @@ export default class Education
         this.popups[section]['building'].show()
     }
 
-    isVisible()
+    isVisible(min, max)
     {
-        if(this.window.educationSectionScrollPercent > 50 && this.window.educationSectionScrollPercent < 200)
+        if(this.window.educationSectionScrollPercent > min && this.window.educationSectionScrollPercent < max)
             return true
         else
             return false
@@ -190,14 +190,44 @@ export default class Education
         this.isClickable = false
     }
 
+    changeSunColor()
+    {
+        var yellow = [255, 255, 0]
+        var white = [255, 255, 155]
+        const y = (this.window.educationSectionScrollPercent - 100) / 100
+        const [r, g, b] = [this.lerp(yellow[0], white[0], y), this.lerp(yellow[1], white[1], y), this.lerp(yellow[2], white[2], y)].map(Math.round)
+        this.sun.material.color.set(new THREE.Color(`rgb(${r}, ${g}, ${b})`))
+    }
+
+    lerp(x, y, a)
+    {
+        return (1 - a) * x + a * y
+    }
+
 
 
     update()
     {
-        if (this.isVisible())
+        if (this.isVisible(50, 150))
+        {
             this.showGroup()
+
+        }
         else
             this.hideGroup()
+
+        if (this.isVisible(100, 200))
+        {
+            this.changeSunColor()
+            var position = new THREE.Vector3();
+            position.setFromMatrixPosition(this.camera.instance.matrixWorld);
+            position.z = 0
+            position.y += 1
+            this.sun.position.copy(position)
+        }
+        else
+        {
+        }
 
         if(this.pointLight)
         {

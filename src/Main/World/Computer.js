@@ -151,8 +151,9 @@ export default class Computer
     
     checkScrollPercent()
     {
-        if(this.window.workScrollPercent > 50 && this.window.workScrollPercent < 150)
+        if(this.window.workSectionScrollPercent > 0 && this.window.workSectionScrollPercent < 100)
         {
+            console.log("ok")
             this.pointLight.intensity = 10
             this.isHovered()
         }

@@ -43,8 +43,6 @@ export default class World
             this.computer = new Computer(this.window.getTopWorldPosition(1))
             this.education = new Education()
             this.interests = new Interests()
-            //this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(0)))
-            //this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(3)))
             // this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(4)))
 
             this.pointsPositions = [
