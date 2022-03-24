@@ -9,6 +9,7 @@ import Points from "./Points.js";
 import TR from "./TR.js";
 import Education from "./Education.js";
 import Interests from "./Interests.js";
+import Bonfire from "./Bonfire.js";
 
 export default class World
 {
@@ -43,6 +44,8 @@ export default class World
             this.computer = new Computer(this.window.getTopWorldPosition(1))
             this.education = new Education()
             this.interests = new Interests()
+            this.bonfire = new Bonfire(this.window.getTopWorldPosition(4))
+
             // this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(4)))
 
             this.pointsPositions = [
@@ -101,7 +104,9 @@ export default class World
 
     update()
     {   
-              
+        
+        if (this.bonfire)
+            this.bonfire.update()
         if(this.interests)
             this.interests.update()
 

@@ -61,6 +61,14 @@ export default [
         ]
     },
     {
+        name: 'bonfireModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/bonfire.glb'
+        ]
+    },
+    {
         name: 'image0',
         type: 'texture',
         path: 'textures/image0.jpg'

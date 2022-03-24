@@ -153,14 +153,15 @@ export default class Computer
     {
         if(this.window.workSectionScrollPercent > 0 && this.window.workSectionScrollPercent < 100)
         {
-            console.log("ok")
-            this.pointLight.intensity = 10
+            if (this.pointLight)
+                this.pointLight.intensity = 10
             this.isHovered()
         }
         else
         {
 
-            this.pointLight.intensity = 0
+            if (this.pointLight)
+                this.pointLight.intensity = 0
 
         }
     }
