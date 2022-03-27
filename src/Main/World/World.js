@@ -62,7 +62,7 @@ export default class World
             this.displayImages = window.setInterval(() =>
             {
                 this.computer.changeImage(this.computer.getChildByName('screen'), this.window.slideIndex)
-            }, 1000)
+            }, 3000)
 
 
             this.environment = new Environment()  

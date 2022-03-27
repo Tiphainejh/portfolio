@@ -71,6 +71,7 @@ export default class Computer
     
     changeImage(element, index)
     {
+        var duration = 3000
         if(this.isPlayingVideo == true)
         {
             clearInterval(this.world.displayImages) 
@@ -78,7 +79,7 @@ export default class Computer
             {
                 this.isPlayingVideo = false
                 this.changeImage(this.getChildByName('screen'), this.window.slideIndex)
-            }, 1000)
+            }, duration)
         }
 
         const image = this.images[index][this.currentImage]
@@ -100,8 +101,8 @@ export default class Computer
                     {  
                         this.isPlayingVideo = false
                         this.changeImage(this.getChildByName('screen'), this.window.slideIndex)
-                    }, 1000)
-                }, video.duration * 1000)
+                    }, duration)
+                }, video.duration * duration)
  
             }
             
@@ -151,7 +152,7 @@ export default class Computer
     
     checkScrollPercent()
     {
-        if(this.window.workSectionScrollPercent > 0 && this.window.workSectionScrollPercent < 100)
+        if(this.window.workSectionScrollPercent > 0 && this.window.workSectionScrollPercent < 150)
         {
             if (this.pointLight)
                 this.pointLight.intensity = 10
