@@ -12,6 +12,7 @@ export default class Camera
         this.world = this.main.world
         this.time = this.main.time
         this.isNotFocused = true
+        this.beforePosition = new THREE.Vector3()
         this.setInstance()
         
         const vFOV = (this.instance.fov * Math.PI) / 180;
@@ -24,7 +25,6 @@ export default class Camera
     {
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 50)
         this.instance.position.z = 6
-        
         this.cameraGroup = new THREE.Group()
         this.cameraGroup.add(this.instance)
         

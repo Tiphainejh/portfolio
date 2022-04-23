@@ -22,8 +22,7 @@ export default class Education
         this.canRotate = true
         this.isClickable = false
         this.focusedObject = null
-        this.cameraPositionBefore = new THREE.Vector3()
-
+        this.isClosing = false
         //setup
         let x = 4
         let middleX = x * 0.5
@@ -95,12 +94,12 @@ export default class Education
 
     closePopup()
     {
-        this.camera.instance.position.copy(this.cameraPositionBefore)
         this.camera.isNotFocused = true
         this.focusedObject = null
         this.isClickable = true
         this.window.html.style.background = this.window.cssVariables.getPropertyValue('--background-color')
-
+        this.isClosing = true
+        console.log("here")
         for (let p in this.popups)
         {
             this.popups[p]['building'].show()
@@ -113,22 +112,18 @@ export default class Education
         var intersects = this.raycaster.intersectObjects(this.allObjects);
 
         if (intersects.length > 0) {
-                        
-            for(const intersect of intersects)
-            {
-                switch (intersect.object.name) {
-                    case 'Namsan':
-                        this.displayText('dulcac', intersect.object);
-                        break;
-                    case 'Campus':
-                        this.displayText("master", intersect.object)
+            
+                switch (intersects[0].object.name) {
+                case 'Namsan':
+                    this.displayText('dulcac', this.scene.getObjectByName( "Ground" ))
                     break;
-                    case 'Business':
-                        this.displayText('poei', intersect.object);
-                        break;
-                    }
-            }
-
+                case 'Campus':
+                    this.displayText("master", this.scene.getObjectByName( "Ground002" ))
+                break;
+                case 'Business':
+                    this.displayText('poei', this.scene.getObjectByName( "Ground003" ))
+                    break;
+                }
         } else {
             this.canRotate = true
             for (let p in this.popups)
@@ -141,10 +136,10 @@ export default class Education
     
     displayText(section, object = none)
     {
+        this.camera.beforePosition.setFromMatrixPosition(this.camera.instance.matrixWorld);
+
         this.camera.isNotFocused = false
         this.focusedObject = object
-        if (this.camera.instance.position.z == 6)
-            this.cameraPositionBefore.setFromMatrixPosition(this.camera.instance.matrixWorld);
 
         this.window.html.style.background = 'white'
         this.isClickable = false
@@ -243,7 +238,20 @@ export default class Education
             position.setFromMatrixPosition(this.focusedObject.matrixWorld);
             position.z += 4
             position.y += 1
-            this.camera.instance.position.copy(position)
+            this.camera.instance.position.lerp(position, 0.1)
+        }
+        
+        if(this.isClosing)
+        {
+       
+            if (this.camera.instance.position.distanceTo(this.camera.beforePosition) > 0.5)
+            {
+                this.camera.instance.position.lerp(this.camera.beforePosition, 0.1)
+            }
+            else
+            {
+                this.isClosing = false
+            }
         }
     
     }
