@@ -51,7 +51,7 @@ export default class Points
 
     update()
     {   
-        if(this.camera && this.resources.sceneReady)
+        if(this.camera)
         {
             for (const p of this.points)
             {
@@ -63,14 +63,14 @@ export default class Points
                 
                     this.raycaster.setFromCamera(screenPosition, this.camera.instance)
                     const intersect = this.raycaster.intersectObjects(this.scene.children, true)
-                    if(intersect.length === 0)
-                    {
-                        p.element.classList.add('visible')
-                    }
-                    else
-                    {
-                        (intersect[0].distance < p.position.distanceTo(this.camera.instance.position)) ? p.element.classList.remove('visible') : p.element.classList.add('visible')
-
+                    switch (intersect.length) {
+                        case 0:
+                            p.element.classList.add('visible')
+                            break;
+                    
+                        default:
+                            (intersect[0].distance < p.position.distanceTo(this.camera.instance.position)) ? p.element.classList.remove('visible') : p.element.classList.add('visible')
+                            break;
                     }
 
                     const translateX = screenPosition.x * this.sizes.width * 0.5
