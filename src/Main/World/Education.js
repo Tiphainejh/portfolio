@@ -20,9 +20,11 @@ export default class Education
         this.xPosition = xPosition
         this.zPosition = zPosition
         this.canRotate = true
-        this.isClickable = false
+        
         this.focusedObject = null
         this.isClosing = false
+        
+        
         //setup
         let x = 4
         let middleX = x * 0.5
@@ -94,12 +96,11 @@ export default class Education
 
     closePopup()
     {
-        this.camera.isNotFocused = true
         this.focusedObject = null
-        this.isClickable = true
+
         this.window.html.style.background = this.window.cssVariables.getPropertyValue('--background-color')
         this.isClosing = true
-        console.log("here")
+
         for (let p in this.popups)
         {
             this.popups[p]['building'].show()
@@ -110,7 +111,6 @@ export default class Education
     {
         this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance);
         var intersects = this.raycaster.intersectObjects(this.allObjects);
-
         if (intersects.length > 0) {
             
                 switch (intersects[0].object.name) {
@@ -138,11 +138,10 @@ export default class Education
     {
         this.camera.beforePosition.setFromMatrixPosition(this.camera.instance.matrixWorld);
 
-        this.camera.isNotFocused = false
         this.focusedObject = object
 
         this.window.html.style.background = 'white'
-        this.isClickable = false
+        
         for (let p in this.popups)
         {
             this.popups[p]['element'].style.display = "none";
@@ -160,7 +159,7 @@ export default class Education
 
     showGroup()
     {
-        if(this.camera.isNotFocused)
+        if(this.focusedObject == null)
         {
             this.group.visible = true
             this.rotate()
@@ -170,16 +169,13 @@ export default class Education
                 this.popups[p]['building'].update()
             }
     
-            this.isClickable = true
         }
 
     }
 
     hideGroup()
     {
-
         this.group.visible = false
-        this.isClickable = false
     }
 
     changeSunColor()
@@ -222,6 +218,7 @@ export default class Education
         }
 
         var position = new THREE.Vector3();
+        
         if(this.pointLight)
         {
             position.setFromMatrixPosition(this.group.matrixWorld);
@@ -229,7 +226,7 @@ export default class Education
             this.pointLight.position.y += 2
         }
 
-        if(!this.camera.isNotFocused && this.focusedObject!=null)
+        if(this.focusedObject!=null)
         {
             position.setFromMatrixPosition(this.focusedObject.matrixWorld);
             position.z += 4

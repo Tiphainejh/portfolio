@@ -33,6 +33,8 @@ export default class Window extends EventEmitter
         this.objectDistance = 4
         this.cssVariables = getComputedStyle(document.querySelector(':root'))
 
+        // closing the window
+
         var closebtns = document.getElementsByClassName("close");
         for (let i = 0; i < closebtns.length; i++) {
             closebtns[i].addEventListener("click", (btn) =>
@@ -43,6 +45,7 @@ export default class Window extends EventEmitter
           }
 
 
+        // collapsible text section
         var collapsibleElement = document.getElementsByClassName("collapsible");
         for (const coll of collapsibleElement)
         {
@@ -88,6 +91,8 @@ export default class Window extends EventEmitter
 
         this.pages = document.querySelectorAll('.container_section')
 
+
+        //check click on computer spacebar
         window.addEventListener('click', () =>
         {
             const computer = this.main.world.computer
@@ -109,14 +114,14 @@ export default class Window extends EventEmitter
             }
 
             const education = this.main.world.education
-            if (education.isClickable)
+
+            if (education.focusedObject == null)
             {
                 education.hasBeenClicked()
             }
         })
 
         
-
     }
 
     mod(n, m) 
@@ -173,7 +178,7 @@ export default class Window extends EventEmitter
 
     hideSections()
     {
-        for(const page of pages)
+        for(const page of this.pages)
         {
             if ((window.scrollY) < page.offsetTop )
             {
