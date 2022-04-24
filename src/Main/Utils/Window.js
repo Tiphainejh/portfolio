@@ -34,7 +34,7 @@ export default class Window extends EventEmitter
         this.cssVariables = getComputedStyle(document.querySelector(':root'))
 
         var closebtns = document.getElementsByClassName("close");
-        for (i = 0; i < closebtns.length; i++) {
+        for (let i = 0; i < closebtns.length; i++) {
             closebtns[i].addEventListener("click", (btn) =>
              {
                 btn.target.parentElement.parentElement.style.display = 'none';
@@ -43,8 +43,8 @@ export default class Window extends EventEmitter
           }
 
 
-        var collapsible = document.getElementsByClassName("collapsible");
-        for (const coll of collapsible)
+        var collapsibleElement = document.getElementsByClassName("collapsible");
+        for (const coll of collapsibleElement)
         {
             coll.addEventListener("click", (collapsible) => {
                 var centered = collapsible.target.parentElement
@@ -127,14 +127,15 @@ export default class Window extends EventEmitter
     showSlides(n)
     {
         var slides = document.getElementsByClassName("slides");
-        this.slideIndex = this.mod(this.slideIndex+=n, slides.length)
+        this.slideIndex+=n
+        this.slideIndex = this.mod(this.slideIndex, slides.length)
         for (var slide of slides)
             slide.style.display = "none";
 
         slides[this.slideIndex].style.display = "block";
     }
 
-    detectTrackPad(e) {
+    detectTrackPad(_e) {
         this.scrollY = window.scrollY
         const newSection = Math.round(this.scrollY / this.sizes.height)
         var menuTextColorHover = this.cssVariables.getPropertyValue('--default-color')
@@ -153,7 +154,6 @@ export default class Window extends EventEmitter
             }
         }
 
-        //TODO organise
         this.planeSectionScrollPercent = this.getScrollPercent(this.planeSection)
         this.educationSectionScrollPercent = this.getScrollPercent(this.educationSection)
         this.workSectionScrollPercent = this.getScrollPercent(this.workSection)
@@ -173,15 +173,15 @@ export default class Window extends EventEmitter
 
     hideSections()
     {
-        for(var i = 0; i< this.pages.length; i++)
+        for(const page of pages)
         {
-            if ((window.scrollY) < this.pages[i].offsetTop )
+            if ((window.scrollY) < page.offsetTop )
             {
-                this.pages[i].classList.add('visible')
+                page.classList.add('visible')
             }
             else
             {
-                this.pages[i].classList.remove('visible');
+                page.classList.remove('visible');
             }
         }
     }

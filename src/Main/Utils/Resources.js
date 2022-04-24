@@ -53,7 +53,7 @@ export default class Resources extends EventEmitter
 
             },
             //progress
-            (itemURL, itemsLoaded, itemsTotal) =>
+            (_itemURL, itemsLoaded, itemsTotal) =>
             {
                 
                 const progressRatio = itemsLoaded / itemsTotal

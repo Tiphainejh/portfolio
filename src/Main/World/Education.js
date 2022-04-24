@@ -221,9 +221,9 @@ export default class Education
         {
         }
 
+        var position = new THREE.Vector3();
         if(this.pointLight)
         {
-            var position = new THREE.Vector3();
             position.setFromMatrixPosition(this.group.matrixWorld);
             this.pointLight.position.copy(position)
             this.pointLight.position.y += 2
@@ -231,7 +231,6 @@ export default class Education
 
         if(!this.camera.isNotFocused && this.focusedObject!=null)
         {
-            var position = new THREE.Vector3();
             position.setFromMatrixPosition(this.focusedObject.matrixWorld);
             position.z += 4
             position.y += 1

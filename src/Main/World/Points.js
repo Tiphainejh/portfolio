@@ -72,14 +72,8 @@ export default class Points
                         const intersectionDistance = intersect[0].distance
                         const pointDistance = point.position.distanceTo(this.camera.instance.position)
     
-                        if(intersectionDistance < pointDistance)
-                        {
-                            point.element.classList.remove('visible')
-                        }
-                        else
-                        {
-                            point.element.classList.add('visible')
-                        }
+                        (intersectionDistance < pointDistance) ? point.element.classList.remove('visible') : point.element.classList.add('visible')
+
                     }
 
                     const translateX = screenPosition.x * this.sizes.width * 0.5
