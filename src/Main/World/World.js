@@ -87,10 +87,24 @@ export default class World
                 .max(10)
                 .step(0.25)
             }
+
+            if (this.bonfire.fireLight)
+            {
+                window.setInterval(() =>
+                {
+                    this.bonfire.fireLight.intensity = this.randomInRange(200, 350) / 100;
+                    this.bonfire.lanternLight.intensity = this.randomInRange(90, 110) / 100;
+                }, 1000)
+                
+            }
         })
          
     }
 
+    randomInRange(min, max)
+    {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 
 
     resize()
@@ -102,14 +116,15 @@ export default class World
     update()
     {   
         
-        if (this.bonfire)
-            this.bonfire.update()
+        
         if(this.interests)
             this.interests.update()
 
         if(this.environment)
             this.environment.update()
-
+        
+            if (this.bonfire)
+            this.bonfire.update()
         if(this.tr)
             this.tr.update()
 

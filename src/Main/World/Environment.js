@@ -10,6 +10,8 @@ export default class Environment
         this.debug = this.main.debug
         this.world = this.main.world
         this.education = this.world.education
+        this.bonfire = this.world.bonfire
+
         //debug
         if(this.debug.active)
         {
@@ -20,9 +22,9 @@ export default class Environment
         
         this.world.computer.pointLight = this.setPointLight(1.5, -2, 0)
         this.world.interests.plane.pointLight = this.setPointLight(0, 0, 0)
-        this.education.pointLight = this.setSunLight(0, 0, 0)
-
-
+        this.education.pointLight = this.setSunLight(20)
+        this.bonfire.fireLight = this.setPointLight(-0.2, -17.5, 0, 0xffbc00, 3, 5)
+        this.bonfire.lanternLight = this.setPointLight(1.2, -16.59, 1.3, 0xffe6a1, 1, 3)
     }
 
     setRectLight()
@@ -68,18 +70,20 @@ export default class Environment
 
     }
 
-    setSunLight()
+    setSunLight(intensity = 1)
     {
         var sunLight = new THREE.DirectionalLight(0xff0000, 1)
         sunLight.position.set(4, 4, 0)
         sunLight.castShadow = true
         sunLight.shadow.mapSize.set(1024, 1024)
-        sunLight.shadow.camera.far = 15
-        sunLight.shadow.camera.left = - 7
-        sunLight.shadow.camera.top = 7
-        sunLight.shadow.camera.right = 7
-        sunLight.shadow.camera.bottom = - 7
-        // const helper = new THREE.DirectionalLightHelper( sunLight, 5 );
+        sunLight.shadow.camera.far = 10
+        sunLight.shadow.camera.left = - 20
+        sunLight.shadow.camera.top = 20
+        sunLight.shadow.camera.right = 20
+        sunLight.shadow.camera.bottom = - 10
+        // const helper2 = new THREE.CameraHelper( sunLight.shadow.camera );
+        // this.scene.add( helper2 )
+        // const helper = new THREE.DirectionalLightHelper( sunLight );
         // this.scene.add(helper);
         this.scene.add(sunLight)
 
@@ -154,15 +158,16 @@ export default class Environment
         return ambientLight
     }
 
-    setPointLight(x, y, z)
+    setPointLight(x, y, z, color = 0xff0000, intensity = 10, distance = 100)
     {
-        var pointLight = new THREE.PointLight( 0xff0000, 10, 100);
+        var pointLight = new THREE.PointLight(color, intensity, distance);
         pointLight.position.set(x, y, z);
         this.scene.add(pointLight)
-        
-        // const sphereSize = 1;
-        // const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-        // this.scene.add( pointLightHelper );
+        pointLight.castShadow = true
+
+        // const sphereSize = 0.5;
+        // const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize );
+        // this.scene.add(pointLightHelper );
         
         if(this.debug.active)
         {

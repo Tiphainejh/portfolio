@@ -37,6 +37,7 @@ export default class Building
                 child.name = this.name
                 child.castShadow = true
                 child.receiveShadow = true
+
                 if(child.material.name == 'Blue')
                 {
                     const material = new THREE.MeshPhysicalMaterial({

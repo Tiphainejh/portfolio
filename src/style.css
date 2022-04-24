@@ -379,6 +379,9 @@ to {opacity: 1}
   
 .close:hover {color: #bbb;}
 
+.texts > div {
+    display: none;
+}
 /* 
 .overlay {
     position: fixed;

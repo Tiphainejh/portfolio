@@ -11,24 +11,111 @@ export default class Bonfire
         this.time = this.main.time
         this.debug = this.main.debug
         this.yPosition = yPosition
-
+        this.window = this.main.window
+        this.camera = this.main.camera
         //setup
         this.resource = this.resources.items.bonfireModel
-
-
+        this.fireLight = null
+        this.lanternLight = null
+        this.raycaster = new THREE.Raycaster();
+        this.isDisplayed = false
         this.setModel()
         this.setAnimations()
+        this.allObjects = []
+        
+        this.model.traverse((child) => 
+        {
+            this.allObjects.push(child)
+        })
+        
+        this.texts = {
+            "Canvas" : { 
+                'element' : document.getElementById("interest_canvas")
+            },
+            "Run" : {
+                'element' : document.getElementById("interest_run")
+            },
+            "Yoga" : {
+                'element' : document.getElementById("interest_yoga")
+            },
+            "Yarn" : {
+                'element' : document.getElementById("interest_yarn")
+            }
+        }
     }
 
     setModel()
     {
         this.model = this.resource.scene
+        this.model.traverse((child) => 
+        {
+            if (child instanceof THREE.Mesh)
+            {   
+                if (child.name == "Fire")
+                {
+                    this.fireLightPosition = child.position   
+                }
+                child.castShadow = true
+                child.receiveShadow = true
+            }
+
+          })
         let scale = 0.2
         this.model.scale.set(scale, scale, scale)
         this.model.position.y = - this.yPosition - 1.5
         this.model.rotation.y = Math.PI /2
         this.scene.add(this.model)
 
+    }
+
+    onHover()
+    {
+        this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance)
+        var intersects = this.raycaster.intersectObjects(this.allObjects, true)
+        if (intersects.length > 0) {
+            var name = intersects[0].object.name
+            if(name.startsWith("Run"))
+            {
+                this.displayText('Run')
+            }
+                
+            else if(name.startsWith("yoga"))
+            {
+                this.displayText('Yoga')
+            }
+            
+            else if(name.startsWith("Canvas"))
+            {
+                this.displayText("Canvas")
+            }
+            
+            else if(name.startsWith("yarn"))
+            {
+                this.displayText("Yarn")
+            }
+                
+                
+        } else {
+            // this.canRotate = true
+            // for (let p in this.popups)
+            // {
+            //     this.popups[p]['building'].canRotate = true
+            // }
+
+        }
+    }
+
+    displayText(section)
+    {
+        console.log("ok")
+        this.isDisplayed = true
+        for (let p in this.texts)
+        {
+            this.texts[p]['element'].style.display = "none";
+        }
+
+        this.texts[section]['element'].style.display = "block";
+        window.setTimeout(() => {this.isDisplayed = false}, 500)
     }
 
     setAnimations()
@@ -80,8 +167,20 @@ export default class Bonfire
         })
     }
 
+  
+
     update()
     {
         if ( this.mixer ) this.mixer.update( this.time.delta * 0.0012 );
+        if(!this.isDisplayed)
+            this.onHover()
+        // if (this.fireLight)
+        // {
+        //     window.setInterval(() =>
+        //     {
+        //         this.fireLight.intensity = this.randomInRange(2, 3)
+        //     }, 2000)
+            
+        // }
     }
 }

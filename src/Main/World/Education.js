@@ -123,13 +123,13 @@ export default class Education
             
                 switch (intersects[0].object.name) {
                 case 'Namsan':
-                    this.displayText('dulcac', this.scene.getObjectByName( "Ground" ))
+                    this.displayText('dulcac', this.scene.getObjectByName("Ground"))
                     break;
                 case 'Campus':
-                    this.displayText("master", this.scene.getObjectByName( "Ground002" ))
+                    this.displayText("master", this.scene.getObjectByName("Ground002"))
                 break;
                 case 'Business':
-                    this.displayText('poei', this.scene.getObjectByName( "Ground003" ))
+                    this.displayText('poei', this.scene.getObjectByName("Ground003"))
                     break;
                 }
         } else {
