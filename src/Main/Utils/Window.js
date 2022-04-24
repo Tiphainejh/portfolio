@@ -50,17 +50,12 @@ export default class Window extends EventEmitter
         for (const coll of collapsibleElement)
         {
             coll.addEventListener("click", (collapsible) => {
-                var centered = collapsible.target.parentElement
+                // var centered = collapsible.target.parentElement
                 // var content = centered.firstElementChild
                 // var popups = collapsible.target.parentElement
                 // var height = content.scrollHeight - centered.scrollHeight
 
                 collapsible.target.classList.toggle("active");
-                if (collapsible.target.classList.contains('active')){
-                    centered.setAttribute("style",`top:-5%; transition: top 1s;`);
-                } else {
-                    centered.setAttribute("style",`top:50%; transition: top 1s;`);
-                } 
         });
         }
         
