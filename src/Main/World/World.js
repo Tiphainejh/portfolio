@@ -1,12 +1,9 @@
 import Main from "../Main.js";
 import Environment from "./Environment.js";
-import Brain from "./Brain.js";
-import Torus from "./Torus.js";
 import Computer from "./Computer.js";
 import Overlay from "./Overlay.js";
 import * as THREE from 'three'
 import Points from "./Points.js";
-import TR from "./TR.js";
 import Education from "./Education.js";
 import Interests from "./Interests.js";
 import Bonfire from "./Bonfire.js";

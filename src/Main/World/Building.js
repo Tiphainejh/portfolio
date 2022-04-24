@@ -1,6 +1,6 @@
 import Main from "../Main.js";
 import * as THREE from 'three'
-import { Color } from "three";
+
 export default class Building
 {
     constructor(xPosition, zPosition, model, name)

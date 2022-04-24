@@ -72,7 +72,7 @@ export default class Computer
     changeImage(element, index)
     {
         var duration = 3000
-        if(this.isPlayingVideo == true)
+        if(this.isPlayingVideo)
         {
             clearInterval(this.world.displayImages) 
             this.world.displayImages = window.setInterval(() =>

@@ -83,7 +83,7 @@ export default class Education
 
     stopRotation()
     {
-        this.group.rotation.y = this.group.rotation.y
+        //this.group.rotation.y = this.group.rotation.y #TODO
         this.canRotate = false
         for (let p in this.popups)
         {
@@ -155,10 +155,7 @@ export default class Education
 
     isVisible(min, max)
     {
-        if(this.window.educationSectionScrollPercent > min && this.window.educationSectionScrollPercent < max)
-            return true
-        else
-            return false
+        return (this.window.educationSectionScrollPercent > min && this.window.educationSectionScrollPercent < max)
     }
 
     showGroup()

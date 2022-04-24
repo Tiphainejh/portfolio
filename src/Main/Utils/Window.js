@@ -43,11 +43,12 @@ export default class Window extends EventEmitter
           }
 
 
-        var coll = document.getElementsByClassName("collapsible");
-        for (var i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", (collapsible) => {
+        var collapsible = document.getElementsByClassName("collapsible");
+        for (const coll of collapsible)
+        {
+            coll.addEventListener("click", (collapsible) => {
                 var centered = collapsible.target.parentElement
-                var content = centered.firstElementChild
+                // var content = centered.firstElementChild
                 // var popups = collapsible.target.parentElement
                 // var height = content.scrollHeight - centered.scrollHeight
 

@@ -1,4 +1,3 @@
-import Main from '../Main.js'
 import EventEmitter from './EventEmitter.js'
 
 export default class Time extends EventEmitter

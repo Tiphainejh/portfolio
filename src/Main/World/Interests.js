@@ -1,5 +1,4 @@
 import Main from "../Main.js";
-import Building from "./Building";
 import * as THREE from 'three'
 import Plane from "./Plane.js";
 import Particles from "./Particles.js";
@@ -28,10 +27,7 @@ export default class Interests
 
     isVisible()
     {
-        if(this.window.interestsSectionScrollPercent > 0 && this.window.interestsSectionScrollPercent < 150)
-            return true
-        else
-            return false
+        return (this.window.interestsSectionScrollPercent > 0 && this.window.interestsSectionScrollPercent < 150)
     }
 
 
