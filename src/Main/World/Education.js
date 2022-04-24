@@ -100,6 +100,14 @@ export default class Education
 
         this.window.html.style.background = this.window.cssVariables.getPropertyValue('--background-color')
         this.isClosing = true
+        var startTime = new Date().getTime();
+        var interval = setInterval(() => {
+            if(new Date().getTime() - startTime > 500){
+                clearInterval(interval);
+                return;
+            }
+            this.camera.instance.position.lerp(this.camera.beforePosition, 0.1)
+        }, 20); 
 
         for (let p in this.popups)
         {
@@ -136,6 +144,7 @@ export default class Education
     
     displayText(section, object = none)
     {
+        console.log("before pos ")
         this.camera.beforePosition.setFromMatrixPosition(this.camera.instance.matrixWorld);
 
         this.focusedObject = object
@@ -232,19 +241,6 @@ export default class Education
             position.z += 4
             position.y += 1
             this.camera.instance.position.lerp(position, 0.1)
-        }
-        
-        if(this.isClosing)
-        {
-       
-            if (this.camera.instance.position.distanceTo(this.camera.beforePosition) > 0.5)
-            {
-                this.camera.instance.position.lerp(this.camera.beforePosition, 0.1)
-            }
-            else
-            {
-                this.isClosing = false
-            }
         }
     
     }

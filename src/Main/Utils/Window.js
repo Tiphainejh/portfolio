@@ -44,20 +44,6 @@ export default class Window extends EventEmitter
             });
           }
 
-
-        // collapsible text section
-        var collapsibleElement = document.getElementsByClassName("collapsible");
-        for (const coll of collapsibleElement)
-        {
-            coll.addEventListener("click", (collapsible) => {
-                // var centered = collapsible.target.parentElement
-                // var content = centered.firstElementChild
-                // var popups = collapsible.target.parentElement
-                // var height = content.scrollHeight - centered.scrollHeight
-
-                collapsible.target.classList.toggle("active");
-        });
-        }
         
         window.addEventListener('mousemove', (event) => 
         {
