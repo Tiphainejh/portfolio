@@ -3,10 +3,8 @@ import Environment from "./Environment.js";
 import Computer from "./Computer.js";
 import Overlay from "./Overlay.js";
 import * as THREE from 'three'
-import Points from "./Points.js";
 import Education from "./Education.js";
 import Interests from "./Interests.js";
-import Bonfire from "./Bonfire.js";
 
 export default class World
 {
@@ -41,20 +39,6 @@ export default class World
             this.computer = new Computer(this.window.getTopWorldPosition(1))
             this.education = new Education()
             this.interests = new Interests()
-            this.bonfire = new Bonfire(this.window.getTopWorldPosition(4))
-
-            // this.sectionTorus.push(new Torus(this.window.getTopWorldPosition(4)))
-
-            this.pointsPositions = [
-                {
-                    position: new THREE.Vector3(this.computer.model.position.x-0.2, this.computer.model.position.y+1,this.computer.model.position.z-1),
-                    element: document.querySelector('.point-1'),
-                    isVisible: true
-                }
-            ]
-
-
-            this.points = new Points(this.pointsPositions)
 
             this.displayImages = window.setInterval(() =>
             {
@@ -63,40 +47,17 @@ export default class World
 
 
             this.environment = new Environment()  
-
-            if(this.debug.active)
-            {
-                this.debugFolder
-                .add(this.points.points[0].position, 'x')
-                .name('pointX')
-                .min(-10)
-                .max(10)
-                .step(0.25)
-
-                this.debugFolder
-                .add(this.points.points[0].position, 'y')
-                .name('pointY')
-                .min(-10)
-                .max(10)
-                .step(0.25)
-
-                this.debugFolder
-                .add(this.points.points[0].position, 'z')
-                .name('pointZ')
-                .min(-10)
-                .max(10)
-                .step(0.25)
-            }
-
-            if (this.bonfire.fireLight)
+            if (this.interests.bonfire.fireLight)
             {
                 window.setInterval(() =>
                 {
-                    this.bonfire.fireLight.intensity = this.randomInRange(200, 350) / 100;
-                    this.bonfire.lanternLight.intensity = this.randomInRange(90, 110) / 100;
+                    this.interests.bonfire.fireLight.intensity = this.randomInRange(200, 350) / 100;
+                    this.interests.bonfire.lanternLight.intensity = this.randomInRange(90, 110) / 100;
                 }, 1000)
                 
             }
+        
+           
         })
          
     }
@@ -123,13 +84,9 @@ export default class World
         if(this.environment)
             this.environment.update()
         
-            if (this.bonfire)
-            this.bonfire.update()
+
         if(this.tr)
             this.tr.update()
-
-        if (this.particles)
-            this.particles.update()
 
         if (this.brain)
             this.brain.update()
@@ -152,9 +109,6 @@ export default class World
             this.education.update()
         }
 
-        if(this.points)
-            this.points.update()
-    
 
     }
 }

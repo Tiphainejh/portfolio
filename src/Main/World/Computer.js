@@ -139,7 +139,7 @@ export default class Computer
             {
                 if( intersect.object.userData.name == 'spacebar')
                 {
-                    this.changeColor(this.getChildByName('spacebar'), 0xff0000)
+                    this.changeColor(this.getChildByName('spacebar'), 0x741b47)
                     this.isClickable = true
                 }
             }

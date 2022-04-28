@@ -16,7 +16,7 @@ export default class Education
         this.world = this.main.world
         this.environment = this.world.environment
         this.raycaster = new THREE.Raycaster();
-        this.pointLight = null
+        this.sunLight = null
         this.xPosition = xPosition
         this.zPosition = zPosition
         this.canRotate = true
@@ -228,11 +228,11 @@ export default class Education
 
         var position = new THREE.Vector3();
         
-        if(this.pointLight)
+        if(this.sunLight)
         {
             position.setFromMatrixPosition(this.group.matrixWorld);
-            this.pointLight.position.copy(position)
-            this.pointLight.position.y += 2
+            this.sunLight.position.copy(position)
+            this.sunLight.position.y += 2
         }
 
         if(this.focusedObject!=null)

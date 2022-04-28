@@ -2,6 +2,7 @@ import Main from "../Main.js";
 import * as THREE from 'three'
 import Plane from "./Plane.js";
 import Particles from "./Particles.js";
+import Bonfire from "./Bonfire.js";
 
 export default class Interests
 {
@@ -22,7 +23,9 @@ export default class Interests
         //setup
         this.plane = new Plane(this.window.getTopWorldPosition(4))
         this.particles = new Particles(this.window.getTopWorldPosition(4))
-
+        this.bonfire = new Bonfire(this.window.getTopWorldPosition(4))
+       
+        
     }
 
     isVisible()
@@ -52,6 +55,9 @@ export default class Interests
     {
         if (this.plane)
             this.plane.update()
+
+        if (this.bonfire)
+            this.bonfire.update()
 
         if (this.isVisible())
         {

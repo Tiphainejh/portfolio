@@ -83,7 +83,7 @@ export default class Window extends EventEmitter
                 this.showSlides(1);
                 const spacebar = computer.getChildByName('spacebar')
                 const screen = computer.getChildByName('screen')
-                computer.changeColor(spacebar, 0x00ff00)
+                computer.changeColor(spacebar, 0xfcf2d3)
                 computer.changeImage(screen, this.slideIndex)
                 computer.currentImage = 0
 
@@ -91,7 +91,7 @@ export default class Window extends EventEmitter
                 window.setInterval(() =>
                 {
                     computer.isClicked = false
-                }, 1000)
+                }, 500)
             }
 
             const education = this.main.world.education

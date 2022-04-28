@@ -71,61 +71,7 @@ header{
 
 }
 
-.point
-{
-    position: absolute;
-    top: 50%;
-    left:50%;
-    z-index: 3;
-}
 
-.point:hover .text
-{
-    opacity: 1;
-}
-
-.point.visible .label
-{
-    transform: scale(1,1);
-}
-
-.point .label
-{
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #00000077;
-    color: #ffffff;
-    text-align: center;
-    line-height: 40px;
-    font-size: 14px;
-    font-weight: 100;
-    cursor: help;
-    transform: scale(0,0);
-    transition: transform 0.3s;
-}
-
-.point .text
-{
-    position: absolute;
-    top: 30px;
-    width: 200px;
-    background: #00000077;
-    color: #ffffff;
-    line-height: 1.3em;
-    font-size: 14px;
-    font-weight: 100;
-    left: -120px;
-    padding: 10px;
-    border-radius: 4px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
 
 
 .container_section
@@ -244,6 +190,7 @@ h1{
 
 #work_content > div{
     padding-bottom: 30px;
+    padding-top: 20px;
 }
 
 #work_content{
@@ -257,7 +204,7 @@ h1{
 
 .position{
     font-weight: bold;
-    font-size:5vw;
+    font-size:4vw;
     text-align: left;
     display: block;
 }
@@ -381,6 +328,10 @@ to {opacity: 1}
 
 .texts > div {
     display: none;
+    float: right;
+    padding: 10px;
+    font-size: 4vh;
+    color: white;
 }
 /* 
 .overlay {

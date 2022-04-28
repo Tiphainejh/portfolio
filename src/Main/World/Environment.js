@@ -10,7 +10,7 @@ export default class Environment
         this.debug = this.main.debug
         this.world = this.main.world
         this.education = this.world.education
-        this.bonfire = this.world.bonfire
+        this.bonfire = this.world.interests.bonfire
 
         //debug
         if(this.debug.active)
@@ -22,7 +22,7 @@ export default class Environment
         
         this.world.computer.pointLight = this.setPointLight(1.5, -2, 0)
         this.world.interests.plane.pointLight = this.setPointLight(0, 0, 0)
-        this.education.pointLight = this.setSunLight(20)
+        this.education.sunLight = this.setSunLight(20)
         this.bonfire.fireLight = this.setPointLight(-0.2, -17.5, 0, 0xffbc00, 3, 5)
         this.bonfire.lanternLight = this.setPointLight(1.2, -16.59, 1.3, 0xffe6a1, 1, 3)
     }

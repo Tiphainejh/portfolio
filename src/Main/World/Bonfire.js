@@ -55,14 +55,19 @@ export default class Bonfire
                 {
                     this.fireLightPosition = child.position   
                 }
-                child.castShadow = true
+
+                if((child.name.startsWith("Run")) || (child.name.startsWith("yoga")) || (child.name.startsWith("Canvas")) || (child.name.startsWith("yarn")))
+                {
+                    child.castShadow = true
+                }
+         
                 child.receiveShadow = true
             }
 
           })
         let scale = 0.2
         this.model.scale.set(scale, scale, scale)
-        this.model.position.y = - this.yPosition - 1.5
+        this.model.position.y = - this.yPosition - 1.3
         this.model.rotation.y = Math.PI /2
         this.scene.add(this.model)
 
@@ -73,6 +78,7 @@ export default class Bonfire
         this.raycaster.setFromCamera(this.window.mouseVector.clone(), this.camera.instance)
         var intersects = this.raycaster.intersectObjects(this.allObjects, true)
         if (intersects.length > 0) {
+            document.body.style.cursor = "pointer";
             var name = intersects[0].object.name
             if(name.startsWith("Run"))
             {
@@ -96,18 +102,12 @@ export default class Bonfire
                 
                 
         } else {
-            // this.canRotate = true
-            // for (let p in this.popups)
-            // {
-            //     this.popups[p]['building'].canRotate = true
-            // }
-
+            document.body.style.cursor = "default";
         }
     }
 
     displayText(section)
     {
-        console.log("ok")
         this.isDisplayed = true
         for (let p in this.texts)
         {
