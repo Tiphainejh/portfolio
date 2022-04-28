@@ -35,7 +35,7 @@ export default class World
             //
             //this.tr = new TR()
 
-            
+            console.log("ok")
             this.computer = new Computer(this.window.getTopWorldPosition(1))
             this.education = new Education()
             this.interests = new Interests()

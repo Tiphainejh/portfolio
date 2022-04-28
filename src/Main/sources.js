@@ -79,11 +79,6 @@ export default [
         path: 'textures/image1.jpg'
     },
     {
-        name: 'image2',
-        type: 'texture',
-        path: 'textures/image2.jpg'
-    },
-    {
         name: 'image3',
         type: 'texture',
         path: 'textures/image3.jpg'
