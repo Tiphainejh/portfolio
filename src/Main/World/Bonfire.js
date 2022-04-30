@@ -171,7 +171,7 @@ export default class Bonfire
 
     update()
     {
-        if ( this.mixer ) this.mixer.update( this.time.delta * 0.0012 );
+        if ( this.mixer ) {this.mixer.update( this.time.delta * 0.0012 );}
         if(!this.isDisplayed)
             this.onHover()
         // if (this.fireLight)

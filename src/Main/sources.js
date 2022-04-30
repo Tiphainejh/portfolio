@@ -61,6 +61,14 @@ export default [
         ]
     },
     {
+        name: 'skillsModel',
+        type: 'gltfModel',
+        path:
+        [
+            'models/skills.glb'
+        ]
+    },
+    {
         name: 'bonfireModel',
         type: 'gltfModel',
         path:
@@ -117,5 +125,50 @@ export default [
         name: 'josefin',
         type: 'font',
         path: 'fonts/Josefin Sans Thin_Regular.json'
+    },
+    {
+        name: 'korean',
+        type: 'texture',
+        path: 'textures/hollographic/korean.png'
+    },
+    {
+        name: 'english',
+        type: 'texture',
+        path: 'textures/hollographic/english.png'
+    },
+    {
+        name: 'french',
+        type: 'texture',
+        path: 'textures/hollographic/french.png'
+    },
+    {
+        name: 'javascript',
+        type: 'texture',
+        path: 'textures/hollographic/javascript.png'
+    },
+    {
+        name: 'php',
+        type: 'texture',
+        path: 'textures/hollographic/php.png'
+    },
+    {
+        name: 'python',
+        type: 'texture',
+        path: 'textures/hollographic/python.png'
+    },
+    {
+        name: 'scikit',
+        type: 'texture',
+        path: 'textures/hollographic/scikit.png'
+    },
+    {
+        name: 'threejs',
+        type: 'texture',
+        path: 'textures/hollographic/threejs.png'
+    },
+    {
+        name: 'symfony',
+        type: 'texture',
+        path: 'textures/hollographic/symfony.png'
     }
 ]

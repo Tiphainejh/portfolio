@@ -2,9 +2,9 @@ import Main from "../Main.js";
 import Environment from "./Environment.js";
 import Computer from "./Computer.js";
 import Overlay from "./Overlay.js";
-import * as THREE from 'three'
 import Education from "./Education.js";
 import Interests from "./Interests.js";
+import Skills from "./Skills.js";
 
 export default class World
 {
@@ -32,17 +32,18 @@ export default class World
         {
 
             //setup
-            //
-            //this.tr = new TR()
-
-            console.log("ok")
+            
             this.computer = new Computer(this.window.getTopWorldPosition(1))
+            this.skills = new Skills(this.window.getTopWorldPosition(2))
             this.education = new Education()
             this.interests = new Interests()
 
             this.displayImages = window.setInterval(() =>
             {
                 this.computer.changeImage(this.computer.getChildByName('screen'), this.window.slideIndex)
+                let index = this.randomInRange(0,8)
+                let key = Object.keys(this.skills.images)[index]
+                this.skills.changeImage(key)
             }, 3000)
 
 
@@ -94,6 +95,10 @@ export default class World
         if (this.computer)
             this.computer.update()
         
+        if (this.skills)
+            this.skills.update()
+        
+
 
 
         if(this.sectionTorus){

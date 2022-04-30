@@ -11,6 +11,7 @@ export default class Environment
         this.world = this.main.world
         this.education = this.world.education
         this.bonfire = this.world.interests.bonfire
+        this.skills = this.world.skills
 
         //debug
         if(this.debug.active)
@@ -25,6 +26,7 @@ export default class Environment
         this.education.sunLight = this.setSunLight(20)
         this.bonfire.fireLight = this.setPointLight(-0.2, -17.5, 0, 0xffbc00, 3, 5)
         this.bonfire.lanternLight = this.setPointLight(1.2, -16.59, 1.3, 0xffe6a1, 1, 3)
+        this.skills.light = this.setPointLight(0, -7, 2, 0xffe6a1, 7, 4)
     }
 
     setRectLight()
@@ -164,7 +166,7 @@ export default class Environment
         pointLight.position.set(x, y, z);
         this.scene.add(pointLight)
         pointLight.castShadow = true
-
+        pointLight.shadow.bias = 0.0001
         // const sphereSize = 0.5;
         // const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize );
         // this.scene.add(pointLightHelper );
